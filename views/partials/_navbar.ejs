@@ -1,0 +1,31 @@
+<nav class="navbar">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="/">
+      <img src="https://cdn2.iconfinder.com/data/icons/kids-glyph-black/2048/5505_-_Eating_Food-256.png" alt="Kid&Cie">
+      &nbsp;
+      Kids & Cie
+    </a>
+    <div class="navbar-burger" data-target="#mobile-menu">
+      <%# toggles the navbar menu on touch device %>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+
+  <div id="mobile-menu" class="navbar-menu">
+    <div class="navbar-start">
+      <a class="navbar-item" href="/restaurants">Restaurants</a>
+    </div>
+
+    <div class="navbar-end">
+        <a class="navbar-item" href="/login"> <span class="icon is-small"><i class="far fa-user"></i></span>&nbsp Login</a>
+        <div class="navbar-item has-dropdown">
+          <a class="navbar-link" href=""> <span class="icon is-small"><i class="fas fa-user"></i></span>&nbsp UserName </a>
+        </div>
+
+
+        <a class="navbar-item" href="/register">Join</a>
+    </div>
+  </div>
+</nav>

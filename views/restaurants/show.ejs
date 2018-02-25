@@ -1,0 +1,63 @@
+<main class="container">
+  <div class="columns is-multiline">
+    <div class="column is-half">
+      <figure class="image">
+        <img src="<%= restaurant.image %>" alt="<%= restaurant.name %>">
+      </figure>
+    </div>
+    <div class="column is-half">
+      <div class="content">
+        <h1 class="is-1"><%= restaurant.name %></h1>
+        <p class="subtitle is-6"><%= restaurant.location %></p>
+        <p class="subtitle is-6">Reviews</p>
+        <div class="content">
+          <p class="subtitle is-6">Price range: <%= restaurant.priceRange %></p>
+          <p class="subtitle is-6">Cuisine: <%= restaurant.cuisine %></p>
+        </div>
+        <p class="subtitle is-6"><%= restaurant.description %></p>
+        <span class="icon is-small"><i class="fas fa-map-marker"></i></span>
+        <span><%= restaurant.address %></span>
+        <span class="icon is-small"><i class="fas fa-phone"></i></span>
+        <span><%= restaurant.phone %></span>
+        <span class="icon is-small"><i class="fas fa-desktop"></i></span>
+        <span><%= restaurant.website %></span>
+      </div>
+      <a href="/restaurants/<%=restaurant._id%>/edit" class="button is-primary">Edit</a>
+      <button class="button is-danger">Delete</button>
+    </div>
+
+    <%# Review section %>
+
+    <div class="column reviews">
+      <article class="media">
+        <figure class="media-left">
+          <p class="image is-64x64">
+            <img src="https://www.fillmurray.com/140/100">
+          </p>
+        </figure>
+        <div class="media-content">
+          <div class="content">
+            <p>
+              <strong>User name</strong> <small>@ email address</small> <small>reviewdate</small>
+              <br>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.
+            </p>
+          </div>
+          <nav class="level is-mobile">
+            <div class="level-left">
+              <a class="level-item">
+                <span class="icon is-small"><i class="fas fa-reply"></i></span>
+              </a>
+              <a class="level-item">
+                <span class="icon is-small"><i class="fas fa-retweet"></i></span>
+              </a>
+              <a class="level-item">
+                <span class="icon is-small"><i class="fas fa-heart"></i></span>
+              </a>
+            </div>
+          </nav>
+        </div>
+      </article>
+    </div>
+  </div>
+</main>
