@@ -31,12 +31,36 @@
       </div>
       <% } %>
       </form>
-
     </div>
 
     <%# Review section %>
-
     <div class="column reviews">
+    <%# form for user to leave a review %>
+      <form action="/restaurants/<%=restaurant._id%>/reviews" method="POST">
+        <article class="media">
+          <figure class="media-left">
+            <p class="image is-64x64">
+              <img src="https://www.fillmurray.com/140/100">
+            </p>
+          </figure>
+          <div class="media-content">
+            <div class="field">
+              <div class="control">
+                <input name="maintitle" class="input" type="text" placeholder="Add a title for your review...">
+              </div>
+            </div>
+            <div class="field">
+              <p class="control">
+                <textarea name="content" class="textarea" placeholder="Add a review..."></textarea>
+              </p>
+            </div>
+              <button class="button is-info">Submit</button>
+          </div>
+        </article>
+      </form>
+
+    <%# Show previous reviews %>
+    <% restaurant.reviews.forEach(review => { %>
       <article class="media">
         <figure class="media-left">
           <p class="image is-64x64">
@@ -46,9 +70,14 @@
         <div class="media-content">
           <div class="content">
             <p>
-              <strong>User name</strong> <small>@ email address</small> <small>reviewdate</small>
+              <% const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+              if(review.user) { console.log(review.user)%>
+              <strong><%= review.user.username %></strong> <small><%= review.user.email %></small> <small><%= monthNames[review.date.getMonth()] %>-<%=review.date.getFullYear() %></small>
+              <% } %>
               <br>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.
+              <strong><%= review.maintitle %></strong>
+              <br>
+              <%= review.content %>
             </p>
           </div>
           <nav class="level is-mobile">
@@ -65,7 +94,14 @@
             </div>
           </nav>
         </div>
+        <div class="media-right">
+          <form action="/restaurants/<%=restaurant._id%>/reviews/<%=review._id%>" method="POST">
+            <button class="delete"></button>
+            <input type="hidden" name="_method" value="DELETE">
+          </form>
+        </div>
       </article>
+    <% }) %>
     </div>
   </div>
 </main>

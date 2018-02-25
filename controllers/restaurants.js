@@ -52,6 +52,32 @@ function deleteRoute(req, res, next){
     .catch(next);
 }
 
+//newReview for restaurant
+function reviewCreateRoute(req, res, next){
+  //was setup in userAuth
+  req.body.user = req.currentUser;
+  Restaurant.findById(req.params.id)
+    //.populate('user') - did not work with populate method
+    .then(restaurant => {
+      restaurant.reviews.push(req.body);
+      return restaurant.save(); //why do we need to RETURN the saved parent collection?
+    })
+    .then(restaurant => res.redirect(`/restaurants/${restaurant._id}`))
+    .catch(next);
+}
+
+function reviewDeleteRoute(req, res, next){
+  Restaurant.findById(req.params.id)
+    .then(restaurant => {
+      //returns review with certain ID
+      const review = restaurant.reviews.id(req.params.reviewId);
+      review.remove();
+      return restaurant.save(); //why do we need to RETURN the saved parent collection?
+    })
+    .then(() => res.redirect(`/restaurants/${req.params.id}`))
+    .catch(next);
+}
+
 module.exports = {
   index: indexRoute,
   new: newRoute,
@@ -59,5 +85,7 @@ module.exports = {
   edit: editRoute,
   update: updateRoute,
   create: createRoute,
-  delete: deleteRoute
+  delete: deleteRoute,
+  reviewCreate: reviewCreateRoute,
+  reviewDelete: reviewDeleteRoute
 };

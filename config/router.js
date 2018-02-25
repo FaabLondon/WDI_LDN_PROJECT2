@@ -23,6 +23,14 @@ router.route('/restaurants/:id')
   .put(secureRoute, restaurants.update)
   .delete(secureRoute, restaurants.delete);
 
+//NEW review
+router.route('/restaurants/:id/reviews')
+  .post(secureRoute, restaurants.reviewCreate);
+
+//NEW review
+router.route('/restaurants/:id/reviews/:reviewId')
+  .delete(secureRoute, restaurants.reviewDelete);
+
 //EDIT Route
 router.route('/restaurants/:id/edit')
   .get(secureRoute, restaurants.edit);
