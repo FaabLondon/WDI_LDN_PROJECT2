@@ -2,6 +2,8 @@ const express = require('express');
 const expressLayouts = require('express-ejs-layouts');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
+const session = require('express-session');
+const userAuth = require('./lib/userAuth');
 
 //Mongoose
 const mongoose = require('mongoose');
@@ -41,6 +43,15 @@ app.use(methodOverride(req => {
     return method;
   }
 }));
+
+//to manage session cookies - uses a key to decrypt the cookie
+app.use(session({
+  secret: 'GysHa^72u91sk3Fab(', // a random key used to encrypt the session cookie
+  resave: false,
+  saveUninitialized: false
+}));
+
+app.use(userAuth);
 
 //tell express to use Router
 app.use(router);

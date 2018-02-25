@@ -3,7 +3,7 @@ const router = require('express').Router();
 const restaurants = require('../controllers/restaurants');
 const registration = require('../controllers/registrations');
 const session = require('../controllers/sessions');
-
+const secureRoute = require('../lib/secureRoute');
 
 //Request listener to serve home template
 router.get('/', (req, res) => res.render('pages/home'));
@@ -11,21 +11,21 @@ router.get('/', (req, res) => res.render('pages/home'));
 //INDEX and CREATE route
 router.route('/restaurants')
   .get(restaurants.index)
-  .post(restaurants.create);
+  .post(secureRoute, restaurants.create);
 
 //NEW route
 router.route('/restaurants/new')
-  .get(restaurants.new);
+  .get(secureRoute, restaurants.new);
 
 //SHOW and DELETE Route
 router.route('/restaurants/:id')
   .get(restaurants.show)
-  .put(restaurants.update)
-  .delete(restaurants.delete);
+  .put(secureRoute, restaurants.update)
+  .delete(secureRoute, restaurants.delete);
 
 //EDIT Route
 router.route('/restaurants/:id/edit')
-  .get(restaurants.edit);
+  .get(secureRoute, restaurants.edit);
 
 //NEW User registration route
 router.route('/register')

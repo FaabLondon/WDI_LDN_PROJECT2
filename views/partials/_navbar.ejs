@@ -19,9 +19,9 @@
     </div>
 
     <div class="navbar-end">
-        <a class="navbar-item" href="/login"> <span class="icon is-small"><i class="far fa-user"></i></span>&nbsp Login</a>
+        <% if(locals.isAuthenticated) { %>
         <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link" href=""> <span class="icon is-small"><i class="fas fa-user"></i></span>&nbsp UserName </a>
+          <a class="navbar-link" href=""> <span class="icon is-small"><i class="fas fa-user"></i></span>&nbsp <%= locals.currentUser.username %></a>
           <div class="navbar-dropdown is-boxed">
             <a class="navbar-item" href="/restaurants/new">Add a restaurant
             </a>
@@ -30,7 +30,10 @@
             </a>
           </div>
         </div>
-        <a class="navbar-item" href="/register">Join</a>
+        <% } else { %>
+          <a class="navbar-item" href="/login"> <span class="icon is-small"><i class="far fa-user"></i></span>&nbsp Login</a>
+          <a class="navbar-item" href="/register">Join</a>
+        <% } %>
     </div>
   </div>
 </nav>
