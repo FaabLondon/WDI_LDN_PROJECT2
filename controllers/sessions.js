@@ -6,7 +6,7 @@ function newRoute(req, res){
   res.render('sessions/new');
 }
 
-//CREATE route - creates a new session
+//CREATE route - creates a new session when logged in
 function createRoute(req, res, next){
   User.findOne({email: req.body.email})
     .then((user) => {
@@ -24,8 +24,14 @@ function createRoute(req, res, next){
     .catch(next);
 }
 
+//logout
+function deleteRoute(req, res){
+  req.session.regenerate(() => res.redirect('/'));
+}
+
 
 module.exports = {
   new: newRoute,
-  create: createRoute
+  create: createRoute,
+  delete: deleteRoute
 };

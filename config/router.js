@@ -32,9 +32,13 @@ router.route('/register')
   .get(registration.new)
   .post(registration.create);
 
-//NEW Session route
+//NEW, CREATE routes for session - login
 router.route('/login')
   .get(session.new)
   .post(session.create);
+
+//DELETE Session - logout
+router.route('/logout')
+  .get(session.delete);
 
 module.exports = router;

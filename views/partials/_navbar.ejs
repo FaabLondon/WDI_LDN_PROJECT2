@@ -1,4 +1,4 @@
-<nav class="navbar">
+<nav class="navbar is-light">
   <div class="navbar-brand">
     <a class="navbar-item" href="/">
       <img src="https://cdn2.iconfinder.com/data/icons/kids-glyph-black/2048/5505_-_Eating_Food-256.png" alt="Kid&Cie">
@@ -22,7 +22,7 @@
         <% if(locals.isAuthenticated) { %>
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link" href=""> <span class="icon is-small"><i class="fas fa-user"></i></span>&nbsp <%= locals.currentUser.username %></a>
-          <div class="navbar-dropdown is-boxed">
+          <div class="navbar-dropdown is-boxed is-right">
             <a class="navbar-item" href="/restaurants/new">Add a restaurant
             </a>
             <hr class="navbar-divider">
