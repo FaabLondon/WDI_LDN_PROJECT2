@@ -1,17 +1,16 @@
 <div class="container">
-  <div class="title is-4">Edit restaurant: <%= restaurant.name %></div>
-  <form method="POST" action="/restaurants/<%= restaurant._id %>">
-    <input type="hidden" name="_method" value="PUT">
+  <div class="title is-4">Add a new restaurant</div>
+  <form method="POST" action="/restaurants">
     <div class="field">
       <label class="label">Name</label>
       <div class="control">
-        <input name="name" class="input" type="text" placeholder="Name of restaurant" value="<%= restaurant.name %>">
+        <input name="name" class="input" type="text" placeholder="Name of restaurant" required>
       </div>
     </div>
     <div class="field">
       <label class="label">Location</label>
       <div class="control has-icons-left">
-        <input name="location" class="input" type="text" placeholder="City" value="<%= restaurant.location %>">
+        <input name="location" class="input" type="text" placeholder="City" required>
         <span class="icon is-small"><i class="fas fa-map-marker"></i></span>
       </div>
     </div>
@@ -19,7 +18,7 @@
       <label class="label">Price range</label>
       <div class="control">
         <div class="select" >
-          <select name="priceRange" value="<%= restaurant.priceRange %>">
+          <select name="priceRange" required>
             <option disabled>Select price range</option>
             <option value="£">£</option>
             <option value="££">££</option>
@@ -32,39 +31,39 @@
     <div class="field">
       <label class="label">Cuisine</label>
       <div class="control">
-        <input name="cuisine" class="input" type="text" placeholder="Type of cuisine" value="<%= restaurant.cuisine %>">
+        <input name="cuisine" class="input" type="text" placeholder="Type of cuisine" required>
       </div>
     </div>
     <div class="field">
       <label class="label">Description</label>
       <div class="control">
-        <textarea name="description" class="textarea" placeholder="Description (380 chars max)"><%= restaurant.description %></textarea>
+        <textarea name="description" class="textarea" placeholder="Description (380 chars max)" required maxlength="360"></textarea>
       </div>
     </div>
     <div class="field">
       <label class="label">Image</label>
       <div class="control">
-        <input name="image" class="input" type="text" placeholder="link to image" value="<%= restaurant.image %>">
+        <input name="image" class="input" type="text" placeholder="link to image" required pattern="/^https?:\/\/.+/">
       </div>
     </div>
     <div class="field">
       <label class="label">Address</label>
       <div class="control has-icons-left">
-        <input name="address" class="input" type="text" placeholder="Address" value="<%= restaurant.address %>">
+        <input name="address" class="input" type="text" placeholder="Address" required>
         <span class="icon is-small"><i class="fas fa-home"></i></span>
       </div>
     </div>
     <div class="field">
       <label class="label">Phone</label>
       <div class="control has-icons-left">
-        <input name="phone" class="input" type="text" placeholder="Phone Number" value="<%= restaurant.phone %>">
+        <input name="phone" class="input" type="text" placeholder="Phone Number" required>
         <span class="icon is-small"><i class="fas fa-phone"></i></span>
       </div>
     </div>
     <div class="field">
       <label class="label">Website</label>
       <div class="control has-icons-left">
-        <input name="website" class="input" type="text" placeholder="Website" value="<%= restaurant.website %>">
+        <input name="website" class="input" type="text" placeholder="Website" required pattern="/^https?:\/\/.+/">
         <span class="icon is-small"><i class="fas fa-desktop"></i></span>
       </div>
     </div>

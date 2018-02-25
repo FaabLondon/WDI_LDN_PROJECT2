@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="title is-4">Register</div>
+  <form method="POST" action="/register">
+
+    <div class="field">
+      <label class="label">Username</label>
+      <div class="control has-icons-left">
+        <input name="username" class="input" type="text" placeholder="Your username" required>
+        <span class="icon is-small"><i class="far fa-user"></i></span>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Email</label>
+      <div class="control has-icons-left">
+        <input name="email" class="input" type="text" placeholder="Your email" required>
+        <span class="icon is-small"><i class="far fa-envelope"></i></span>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Password</label>
+      <div class="control">
+        <input name="password" class="input" type="password" placeholder="Password" required>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Password confirmation</label>
+      <div class="control">
+        <input name="passwordConfirmation" class="input" type="password" placeholder="Password Confirmation" required>
+      </div>
+    </div>
+    <button class="button">Register</button>
+  </form>
+</div>

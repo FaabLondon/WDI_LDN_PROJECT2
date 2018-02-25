@@ -45,5 +45,13 @@ app.use(methodOverride(req => {
 //tell express to use Router
 app.use(router);
 
+// error handler
+app.use((err, req, res, next) => { //eslint-disable-line
+  console.log(err);
+  if(err.name === 'ValidationError') return res.render('pages/422', {err});
+  res.render('pages/500', {err});
+  // next(err);
+});
+
 //Start the app listening out for incoming connections
 app.listen(PORT, () => console.log(`Up and running on port ${PORT}`));

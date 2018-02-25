@@ -1,5 +1,5 @@
 //Model will connect to DB and perform CRUD actions on DB
-
+//Restaurant and review models
 const mongoose = require('mongoose');
 
 const reviewSchema = new mongoose.Schema({
@@ -11,15 +11,15 @@ const reviewSchema = new mongoose.Schema({
 });
 
 const schema = new mongoose.Schema({
-  name: {type: String, required: true},
+  name: {type: String, required: true, unique: true},
   location: {type: String, required: true},
   priceRange: {type: String, required: true},
   cuisine: {type: String, required: true},
-  description: {type: String, maxlength: 360},
-  image: {type: String,pattern: /^https?:\/\/.+/},
-  address: {type: String},
-  phone: {type: String},
-  website: {type: String,pattern: /^https?:\/\/.+/},
+  description: {type: String, required: true, maxlength: 360},
+  image: {type: String, required: true, pattern: /^https?:\/\/.+/},
+  address: {type: String,required: true},
+  phone: {type: String, required: true},
+  website: {type: String, required: true, pattern: /^https?:\/\/.+/},
   reviews: [reviewSchema]
   //createbyUser:
 });

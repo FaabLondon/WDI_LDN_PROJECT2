@@ -32,9 +32,32 @@ function updateRoute(req, res, next){
     .catch(next);
 }
 
+//NEW route for restaurant
+function newRoute(req, res){
+  res.render('restaurants/new');
+}
+
+//CREATE route
+function createRoute(req, res, next){
+  Restaurant.create(req.body)
+    .then(() => res.redirect('/restaurants'))
+    .catch(next);
+}
+
+//DELETE Route
+function deleteRoute(req, res, next){
+  Restaurant.findById(req.params.id)
+    .then(restaurant => restaurant.remove())
+    .then(() => res.redirect('/restaurants'))
+    .catch(next);
+}
+
 module.exports = {
   index: indexRoute,
+  new: newRoute,
   show: showRoute,
   edit: editRoute,
-  update: updateRoute
+  update: updateRoute,
+  create: createRoute,
+  delete: deleteRoute
 };
