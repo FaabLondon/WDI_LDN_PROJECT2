@@ -3,10 +3,22 @@
     background-size: cover;
 }
 
-// .showButtons{
-//   display: flex;
-//   flex-direction: row;
-// }
+.showButtons{
+  display: flex;
+  flex-direction: row;
+
+  button{
+  margin-left: 10px;
+  }
+}
+
+.rating{
+  background-color: yellow;
+
+  // .rating-10:hover{
+  //   background-color: pink;
+  // }
+}
 
 // .level-item{
 //   background-color: pink;

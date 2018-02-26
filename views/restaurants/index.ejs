@@ -2,26 +2,38 @@
   <div class="columns is-multiline">
 
     <div class="column is-one-third-desktop">
-      <div class="content">
-        <h2 class="is-2">Location</h2>
-        <% locations.forEach(location => { %>
-          <div class="field">
-            <label class="checkbox">
-              <input type="checkbox" name="location" value="<%= location %>">
-              <%= location %>
-            </label>
-          </div>
-        <% }) %>
-        <h2 class="is-2">Cuisine</h2>
-        <% cuisines.forEach(cuisine => { %>
-          <div class="field">
-            <label class="checkbox">
-              <input type="checkbox" name="cuisine" value="<%= cuisine %>">
-              <%= cuisine %>
-            </label>
-          </div>
-        <% }) %>
-      </div>
+      <form action="/restaurants" method="GET">
+        <div class="content">
+          <h2 class="is-2">Location</h2>
+          <% locations.forEach(location => { %>
+            <div class="field">
+              <label class="checkbox">
+                <input type="checkbox" name="location" value="<%= location %>">
+                <%= location %>
+              </label>
+            </div>
+          <% }) %>
+          <h2 class="is-2">Cuisine</h2>
+          <% cuisines.forEach(cuisine => { %>
+            <div class="field">
+              <label class="checkbox">
+                <input type="checkbox" name="cuisine" value="<%= cuisine %>">
+                <%= cuisine %>
+              </label>
+            </div>
+          <% }) %>
+          <h2 class="is-2">Price ranges</h2>
+          <% priceRanges.forEach(priceRange => { %>
+            <div class="field">
+              <label class="checkbox">
+                <input type="checkbox" name="priceRange" value="<%= priceRange %>" >
+                <%= priceRange %>
+              </label>
+            </div>
+          <% }) %>
+        </div>
+        <button class="button">Search</button>
+      </form>
     </div>
 
     <div class="column is-two-thirds-desktop">

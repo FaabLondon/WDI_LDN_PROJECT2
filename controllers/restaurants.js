@@ -7,13 +7,16 @@ function indexRoute(req, res, next){
   Restaurant.find().distinct('location', (err, locations) => {
     Restaurant.find().distinct('cuisine', (err, cuisines) => {
       Restaurant.find().distinct('priceRange', (err, priceRanges) => {
-        Restaurant.find()
+        console.log(req.query);
+        Restaurant.find(req.query)
           .then(restaurants => res.render('restaurants/index', {restaurants, locations, cuisines, priceRanges}))
           .catch(next);
       });
     });
   });
 }
+
+
 
 //SHOW route for restaurants
 function showRoute(req, res, next){

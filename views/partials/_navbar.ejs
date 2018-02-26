@@ -15,7 +15,16 @@
 
   <div id="mobile-menu" class="navbar-menu">
     <div class="navbar-start">
-      <a class="navbar-item" href="/restaurants">Restaurants</a>
+      <% if(!locals.isAuthenticated) { %>
+        <a class="navbar-item" href="/restaurants">Restaurants</a>
+      <% } else { %>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="/restaurants"> Restaurants</a>
+          <div class="navbar-dropdown is-boxed">
+            <a class="navbar-item" href="/restaurants/new">Add a restaurant</a>
+          </div>
+        </div>
+      <% } %>
     </div>
 
     <div class="navbar-end">
@@ -23,8 +32,6 @@
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link" href=""> <span class="icon is-small"><i class="fas fa-user"></i></span>&nbsp <%= locals.currentUser.username %></a>
           <div class="navbar-dropdown is-boxed is-right">
-            <a class="navbar-item" href="/restaurants/new">Add a restaurant</a>
-            <hr class="navbar-divider">
             <a class="navbar-item" href="/logout">Logout</a>
             <%if(locals.currentUser.admin === true) {%>
             <hr class="navbar-divider">
