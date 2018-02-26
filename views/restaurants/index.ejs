@@ -1,24 +1,52 @@
 <main class="container indexpage">
   <div class="columns is-multiline">
-    <% restaurants.forEach(restaurant => { %>
-    <div class="column is-one-quarter-desktop is-half-tablet">
-      <a href="/restaurants/<%= restaurant._id %>">
-        <div class="card">
-          <div class="card-image">
-            <figure class="image">
-              <img src="<%=restaurant.image%>" alt="<%=restaurant.name%>">
-            </figure>
+
+    <div class="column is-one-third-desktop">
+      <div class="content">
+        <h2 class="is-2">Location</h2>
+        <% locations.forEach(location => { %>
+          <div class="field">
+            <label class="checkbox">
+              <input type="checkbox" name="location" value="<%= location %>">
+              <%= location %>
+            </label>
           </div>
-          <div class="card-content">
-            <h4 class="subtitle is-4"><%= restaurant.name %></h4>
-            <h6 class="subtitle is-6"><%= restaurant.location %></h6>
-            <h6 class="subtitle is-6">Reviews</h6>
-            <h6 class="subtitle is-6"><%= restaurant.priceRange %></h6>
-            <h6 class="subtitle is-6"><%= restaurant.cuisine %></h6>
+        <% }) %>
+        <h2 class="is-2">Cuisine</h2>
+        <% cuisines.forEach(cuisine => { %>
+          <div class="field">
+            <label class="checkbox">
+              <input type="checkbox" name="cuisine" value="<%= cuisine %>">
+              <%= cuisine %>
+            </label>
           </div>
-        </div>
-      </a>
+        <% }) %>
+      </div>
     </div>
-    <% }) %>
+
+    <div class="column is-two-thirds-desktop">
+      <div class="columns is-multiline">
+        <% restaurants.forEach(restaurant => { %>
+          <div class="column is-half-desktop">
+            <a href="/restaurants/<%= restaurant._id %>">
+              <div class="card">
+                <div class="card-image">
+                  <figure class="image">
+                    <img src="<%=restaurant.image%>" alt="<%=restaurant.name%>">
+                  </figure>
+                </div>
+                <div class="card-content">
+                  <h4 class="subtitle is-4"><%= restaurant.name %></h4>
+                  <h6 class="subtitle is-6"><%= restaurant.location %></h6>
+                  <h6 class="subtitle is-6">Reviews</h6>
+                  <h6 class="subtitle is-6"><%= restaurant.priceRange %></h6>
+                  <h6 class="subtitle is-6"><%= restaurant.cuisine %></h6>
+                </div>
+              </div>
+            </a>
+          </div>
+        <% }) %>
+      </div>
+    </div>
   </div>
 </main>

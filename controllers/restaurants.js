@@ -4,9 +4,15 @@ const Restaurant = require('../models/restaurant');
 
 //INDEX route for restaurants
 function indexRoute(req, res, next){
-  Restaurant.find()
-    .then(restaurants => res.render('restaurants/index', {restaurants}))
-    .catch(next);
+  Restaurant.find().distinct('location', (err, locations) => {
+    Restaurant.find().distinct('cuisine', (err, cuisines) => {
+      Restaurant.find().distinct('priceRange', (err, priceRanges) => {
+        Restaurant.find()
+          .then(restaurants => res.render('restaurants/index', {restaurants, locations, cuisines, priceRanges}))
+          .catch(next);
+      });
+    });
+  });
 }
 
 //SHOW route for restaurants
@@ -109,7 +115,7 @@ function moderateUpdateRoute(req, res, next){
     .then(restaurant => {
       const review = restaurant.reviews.id(req.params.reviewId);
       review.moderated = true;
-      return restaurant.save();  
+      return restaurant.save();
     })
     .then(() => moderateShowRoute(req, res, next))
     .catch(next);

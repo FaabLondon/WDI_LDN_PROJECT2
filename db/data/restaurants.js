@@ -32,7 +32,7 @@ module.exports= [{
   name: 'Caravan',
   location: 'London, UK',
   priceRange: '££',
-  cuisine: 'British, International, Vegetarian Friendly',
+  cuisine: 'British',
   description: 'Well travelled food and mighty fine coffee, in an old grain store. Open all day for breakfast, brunch, lunch, dinner, take-out coffee, pizza and baked goods.',
   image: 'https://bluebadgestyle.com/wp-content/uploads/2012/08/caravan-kings-cross-restaurant-london-photos-31-300x300.jpg',
   address: '1 Granary Square, Kings Cross, London N1C 4AA',
