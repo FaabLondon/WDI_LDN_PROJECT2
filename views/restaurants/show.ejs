@@ -25,9 +25,11 @@
       <% if (locals.isAuthenticated) { %>
       <div class="container showButtons">
         <a href="/restaurants/<%=restaurant._id%>/edit" class="button is-primary">Edit</a>
+        <% if (restaurant.isOwnedBy(locals.currentUser)) {%>
         <form class="form" action="/restaurants/<%=restaurant._id%>" method="post">
           <button class="button is-danger">Delete</button>
           <input type="hidden" name="_method" value="DELETE">
+        <% } %>
       </div>
       <% } %>
       </form>
@@ -47,20 +49,20 @@
             <div class="field">
               <div class="control">
                 <label class="label">Rating</label>
-                <input name="rating" class="input" type="text" placeholder="Add a rating between 0 and 50...">
+                <input name="rating" class="input" type="text" placeholder="Add a rating between 0 and 50..." required min="0" max="50">
                 <%# <span class="icon is-small"><i class="far fa-circle fa-2x"></i><i class="far fa-circle fa-2x"></i><i class="far fa-circle fa-2x"></i><i class="far fa-circle fa-2x"></i><i class="far fa-circle fa-2x"></i></span> %>
               </div>
             </div>
             <div class="field">
               <div class="control">
                 <label class="label">Title</label>
-                <input name="maintitle" class="input" type="text" placeholder="Add a title for your review...">
+                <input name="maintitle" class="input" type="text" placeholder="Add a title for your review..." required minlength="2">
               </div>
             </div>
             <div class="field">
               <p class="control">
                 <label class="label">Describe your experience</label>
-                <textarea name="content" class="textarea" placeholder="Add a review..."></textarea>
+                <textarea name="content" class="textarea" placeholder="Add a review..." required minlength="2"></textarea>
               </p>
             </div>
               <button class="button is-info">Submit</button>
@@ -70,47 +72,51 @@
     <br>
     <%# Show previous reviews %>
     <% restaurant.reviews.forEach(review => { %>
-      <article class="media">
-        <figure class="media-left">
-          <p class="image is-64x64">
-            <img src="https://www.fillmurray.com/140/100">
-          </p>
-        </figure>
-        <div class="media-content">
-          <div class="content">
-            <p>
-              <% if(review.user) { %>
-                <strong><%= review.user.username %></strong>
-                <small><%= review.user.email %></small>
-                <small><%= review.formattedDate %></small>
-              <% } %>
-              <br>
-              <strong><%= review.maintitle %></strong>
-              <br>
-              <%= review.content %>
+      <% if (review.moderated === true) { %>
+        <article class="media">
+          <figure class="media-left">
+            <p class="image is-64x64">
+              <img src="https://www.fillmurray.com/140/100">
             </p>
-          </div>
-          <nav class="level is-mobile">
-            <div class="level-left">
-              <a class="level-item">
-                <span class="icon is-small"><i class="fas fa-reply"></i></span>
-              </a>
-              <a class="level-item">
-                <span class="icon is-small"><i class="fas fa-retweet"></i></span>
-              </a>
-              <a class="level-item">
-                <span class="icon is-small"><i class="fas fa-heart"></i></span>
-              </a>
+          </figure>
+          <div class="media-content">
+            <div class="content">
+              <p>
+                <% if(review.user) { %>
+                  <strong><%= review.user.username %></strong>
+                  <small><%= review.user.email %></small>
+                  <small><%= review.formattedDate %></small>
+                <% } %>
+                <br>
+                <strong><%= review.maintitle %></strong>
+                <br>
+                <%= review.content %>
+              </p>
             </div>
-          </nav>
-        </div>
-        <div class="media-right">
-          <form action="/restaurants/<%=restaurant._id%>/reviews/<%=review._id%>" method="POST">
-            <button class="delete"></button>
-            <input type="hidden" name="_method" value="DELETE">
-          </form>
-        </div>
-      </article>
+            <nav class="level is-mobile">
+              <div class="level-left">
+                <a class="level-item">
+                  <span class="icon is-small"><i class="fas fa-reply"></i></span>
+                </a>
+                <a class="level-item">
+                  <span class="icon is-small"><i class="fas fa-retweet"></i></span>
+                </a>
+                <a class="level-item">
+                  <span class="icon is-small"><i class="fas fa-heart"></i></span>
+                </a>
+              </div>
+            </nav>
+          </div>
+          <div class="media-right">
+            <% if (review.isOwnedBy(locals.currentUser)) {%>
+              <form action="/restaurants/<%=restaurant._id%>/reviews/<%=review._id%>" method="POST">
+                <button class="delete"></button>
+                <input type="hidden" name="_method" value="DELETE">
+              </form>
+            <% } %>
+          </div>
+        </article>
+      <% } %>
     <% }) %>
     </div>
   </div>

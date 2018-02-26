@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 const session = require('express-session');
 const userAuth = require('./lib/userAuth');
+const flash = require('express-flash');
 
 //Mongoose
 const mongoose = require('mongoose');
@@ -51,6 +52,10 @@ app.use(session({
   saveUninitialized: false
 }));
 
+//set up flash messages - must be AFTER express-session as uses session cookie
+app.use(flash());
+
+//to check on each page load wether user is logged in or not
 app.use(userAuth);
 
 //tell express to use Router

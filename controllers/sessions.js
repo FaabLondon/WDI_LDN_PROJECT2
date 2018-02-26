@@ -18,6 +18,7 @@ function createRoute(req, res, next){
       req.session.UserSessionid = user._id;
 
       //flash message
+      req.flash('success', `Welcome back ${user.username}`);
 
       res.redirect('/');
     })

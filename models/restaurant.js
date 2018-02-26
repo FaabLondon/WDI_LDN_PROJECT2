@@ -13,12 +13,18 @@ const reviewSchema = new mongoose.Schema({
   timestamps: true
 });
 
+//add virtual to display time stamp on review
 reviewSchema
   .virtual('formattedDate') //Name of the virtual
   .get(function getFormattedDate() { //it gets data from the DB
     const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     return monthNames[this.createdAt.getMonth()] + '-' + this.createdAt.getFullYear();
   });
+
+//add methods to check wether a review is owned bt a certain user
+reviewSchema.methods.isOwnedBy = function(user){ //pass in logged in User
+  return this.user && user._id.equals(this.user._id);   //.this is the comment . HAve to use .equals as comparing 2 objects
+};
 
 //restaurant schema
 const schema = new mongoose.Schema({
@@ -34,5 +40,11 @@ const schema = new mongoose.Schema({
   reviews: [reviewSchema],
   user: { type: mongoose.Schema.ObjectId, ref: 'User'}
 });
+
+//add methods to check wether a restaurant is owned by a certain user
+schema.methods.isOwnedBy = function(user){ //pass in logged in User
+  // (typeof this.user === 'undefined' || user === 'undefined') 
+  return this.user && user._id.equals(this.user._id);   //.this is the restaurant
+};
 
 module.exports = mongoose.model('Restaurant', schema);

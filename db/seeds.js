@@ -1,15 +1,33 @@
 //file to seed the mongoose DB with data
-
 const mongoose = require('mongoose');
 const Restaurant = require('../models/restaurant');
 mongoose.Promise = require('bluebird');
-const restaurantData = require('./data/restaurants');
+let restaurantData = require('./data/restaurants');
+const User = require('../models/user');
 
 mongoose.connect('mongodb://localhost/main-database', (err, db) =>{
   db.dropDatabase();
 
-  Restaurant.create(restaurantData)
-    .then(restaurants => console.log(`${restaurants.length} records created`))
-    .catch(err => console.log(err))
-    .finally(() => mongoose.connection.close());
+  //Create the admin account - password is modified afterwards and create all restaurants in DB with that user
+  User.create({
+    username: 'FaabLondon',
+    email: 'faabke@gmail.com',
+    password: 'password',
+    passwordConfirmation: 'password',
+    admin: true
+  })
+  
+    .then(user => {
+      restaurantData = restaurantData.map(restaurant => {
+        restaurant.user = user;
+        return restaurant;
+      });
+
+      Restaurant.create(restaurantData)
+        .then(restaurants => {
+          console.log(`${restaurants.length} records created`);
+        })
+        .catch(err => console.log(err))
+        .finally(() => mongoose.connection.close());
+    });
 });

@@ -1,0 +1,57 @@
+<main class="container">
+  <div class="content">
+    <h1 class="is-1">Please validate or delete users commments</h1>
+  </div>
+  <div class="columns is-multiline">
+    <div class="column">
+      <% restaurants.forEach(restaurant => { %>
+      <div class="content">
+        <h1 class="is-1"><%= restaurant.name %></h1>
+        <p class="subtitle is-6"><%= restaurant.location %></p>
+      </div>
+    <br>
+      <% restaurant.reviews.forEach(review => { %>
+        <article class="media">
+          <figure class="media-left">
+            <p class="image is-64x64">
+              <img src="https://www.fillmurray.com/140/100">
+            </p>
+          </figure>
+          <div class="media-content">
+            <div class="content">
+              <p>
+                <% if(review.user) { %>
+                  <strong><%= review.user.username %></strong>
+                  <small><%= review.user.email %></small>
+                  <small><%= review.formattedDate %></small>
+                <% } %>
+                <br>
+                <strong><%= review.maintitle %></strong>
+                <br>
+                <%= review.content %>
+              </p>
+            </div>
+          </div>
+          <div class="media-right">
+            <form action="/moderate/<%=restaurant._id%>/reviews/<%=review._id%>" method="POST">
+              <button class="delete"></button>
+              <input type="hidden" name="_method" value="DELETE">
+            </form>
+            <a href="/moderate/<%=restaurant._id%>/reviews/<%=review._id%>" class="button is-small">
+              <span class="icon is-small">
+                <i class="fas fa-check"></i>
+              </span>
+            </a>
+            <br>
+            <% const message = review.moderated === true? "VALIDATED" : "AWAITING VALIDATION" %>
+              <strong><%= message %></strong>
+          </div>
+        </article>
+      <% }) %>
+      <br>
+      <div class="is-divider" data-content="NEXT RECORD"></div>
+      <br>
+    <% }) %>
+    </div>
+  </div>
+</main>

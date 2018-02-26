@@ -6,7 +6,8 @@ const bcrypt = require('bcrypt');
 const schema = new mongoose.Schema({
   username: {type: String, required: true},
   email: {type: String, required: true, unique: true},
-  password: {type: String, required: true}
+  password: {type: String, required: true},
+  admin: {type: Boolean}
 });
 
 // set up the 'passwordConfirmation' virtual
@@ -38,7 +39,7 @@ schema.pre('save', function hashPassword(next){
 });
 
 // compareSync compares a plain text password against the hashed one stored on the user object
-// Any functions added to the methods object will be shared by all instances of the model. 
+// Any functions added to the methods object will be shared by all instances of the model.
 schema.methods.validatePassword = function validatePassword(password) {
   return bcrypt.compareSync(password, this.password);
 };

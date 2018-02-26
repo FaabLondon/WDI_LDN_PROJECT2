@@ -31,6 +31,15 @@ router.route('/restaurants/:id/reviews')
 router.route('/restaurants/:id/reviews/:reviewId')
   .delete(secureRoute, restaurants.reviewDelete);
 
+//Show moderation page Reviews
+router.route('/moderate')
+  .get(secureRoute, restaurants.moderateShow);
+
+//UPDATE or DELETE reviews in Moderation
+router.route('/moderate/:id/reviews/:reviewId')
+  .delete(secureRoute, restaurants.moderateDelete)
+  .get(secureRoute, restaurants.moderateUpdate);
+
 
 //EDIT Route
 router.route('/restaurants/:id/edit')

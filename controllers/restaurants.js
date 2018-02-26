@@ -13,6 +13,8 @@ function indexRoute(req, res, next){
 function showRoute(req, res, next){
   Restaurant.findById(req.params.id)
     .populate('reviews.user') //to make sure to get the data for the referenced record when we retrieve the data from the database. Otherwise just gets ID
+    //search for user attached to reviews array and populates it. It  means that it replaces ID by user object
+    .populate('user') //had to populate user data in order to get access to restaurant.user._id
     .then(restaurant => res.render('restaurants/show', {restaurant}))
     .catch(next);
 }
@@ -40,6 +42,7 @@ function newRoute(req, res){
 
 //CREATE route
 function createRoute(req, res, next){
+  req.body.user = req.currentUser; //to add user to the resturant inserted to DB
   Restaurant.create(req.body)
     .then(() => res.redirect('/restaurants'))
     .catch(next);
@@ -55,14 +58,16 @@ function deleteRoute(req, res, next){
 
 //newReview for restaurant
 function reviewCreateRoute(req, res, next){
-  //was setup in userAuth
-  req.body.user = req.currentUser;
+  req.body.user = req.currentUser; //add user to new review - was setup in userAuth
   Restaurant.findById(req.params.id)
     .then(restaurant => {
+      req.flash('danger', 'Thank you for your contribution. Our moderators will review your comment and publish it shortly');
       restaurant.reviews.push(req.body);
-      return restaurant.save(); //why do we need to RETURN the saved parent collection?
+      return restaurant.save(); //why do we need to RETURN the saved parent collection - it is a callback so needs to be returned otherwise undefined
     })
-    .then(restaurant => res.redirect(`/restaurants/${restaurant._id}`))
+    .then(restaurant => {
+      res.redirect(`/restaurants/${restaurant._id}`);
+    })
     .catch(next);
 }
 
@@ -78,6 +83,38 @@ function reviewDeleteRoute(req, res, next){
     .catch(next);
 }
 
+function moderateShowRoute(req, res, next){
+  Restaurant.find()
+    .populate('reviews')
+    //.populate('user') //had to populate user data in order to get access to restaurant.user._id
+    .then(restaurants => {
+      res.render('restaurants/showReview', {restaurants});
+    })
+    .catch(next);
+}
+
+function moderateDeleteRoute(req, res, next){
+  Restaurant.findById(req.params.id)
+    .then(restaurant => {
+      const review = restaurant.reviews.id(req.params.reviewId);
+      review.remove();
+      return restaurant.save(); //why do we need to RETURN the saved parent collection?
+    })
+    .then(() => moderateShowRoute(req, res, next))
+    .catch(next);
+}
+
+function moderateUpdateRoute(req, res, next){
+  Restaurant.findById(req.params.id)
+    .then(restaurant => {
+      const review = restaurant.reviews.id(req.params.reviewId);
+      review.moderated = true;
+      return restaurant.save();  
+    })
+    .then(() => moderateShowRoute(req, res, next))
+    .catch(next);
+}
+
 module.exports = {
   index: indexRoute,
   new: newRoute,
@@ -88,4 +125,7 @@ module.exports = {
   delete: deleteRoute,
   reviewCreate: reviewCreateRoute,
   reviewDelete: reviewDeleteRoute,
+  moderateShow: moderateShowRoute,
+  moderateDelete: moderateDeleteRoute,
+  moderateUpdate: moderateUpdateRoute
 };
