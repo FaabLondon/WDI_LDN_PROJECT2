@@ -12,6 +12,7 @@ function indexRoute(req, res, next){
 //SHOW route for restaurants
 function showRoute(req, res, next){
   Restaurant.findById(req.params.id)
+    .populate('reviews.user') //to make sure to get the data for the referenced record when we retrieve the data from the database. Otherwise just gets ID
     .then(restaurant => res.render('restaurants/show', {restaurant}))
     .catch(next);
 }
@@ -57,7 +58,6 @@ function reviewCreateRoute(req, res, next){
   //was setup in userAuth
   req.body.user = req.currentUser;
   Restaurant.findById(req.params.id)
-    //.populate('user') - did not work with populate method
     .then(restaurant => {
       restaurant.reviews.push(req.body);
       return restaurant.save(); //why do we need to RETURN the saved parent collection?
@@ -78,6 +78,17 @@ function reviewDeleteRoute(req, res, next){
     .catch(next);
 }
 
+function reviewEditRoute(req, res, next){
+  Restaurant.findById(req.params.id)
+    .then(restaurant => {
+      //returns review with certain ID
+      const review = restaurant.reviews.id(req.params.reviewId);
+      //console.log(review);
+      res.render(`/restaurants/${req.params.id}`, {review});
+    })
+    .catch(next);
+}
+
 module.exports = {
   index: indexRoute,
   new: newRoute,
@@ -87,5 +98,6 @@ module.exports = {
   create: createRoute,
   delete: deleteRoute,
   reviewCreate: reviewCreateRoute,
-  reviewDelete: reviewDeleteRoute
+  reviewDelete: reviewDeleteRoute,
+  reviewEdit: reviewEditRoute
 };

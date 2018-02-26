@@ -39,7 +39,7 @@
       <form action="/restaurants/<%=restaurant._id%>/reviews" method="POST">
         <article class="media">
           <figure class="media-left">
-            <p class="image is-64x64">
+            <p class="image is-4by3">
               <img src="https://www.fillmurray.com/140/100">
             </p>
           </figure>
@@ -64,7 +64,7 @@
           </div>
         </article>
       </form>
-
+    <br>
     <%# Show previous reviews %>
     <% restaurant.reviews.forEach(review => { %>
       <article class="media">
@@ -76,9 +76,10 @@
         <div class="media-content">
           <div class="content">
             <p>
-              <% const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-              if(review.user) { console.log(review.user)%>
-              <strong><%= review.user.username %></strong> <small><%= review.user.email %></small> <small><%= monthNames[review.date.getMonth()] %>-<%=review.date.getFullYear() %></small>
+              <% if(review.user) { %>
+                <strong><%= review.user.username %></strong>
+                <small><%= review.user.email %></small>
+                <small><%= review.formattedDate %></small>
               <% } %>
               <br>
               <strong><%= review.maintitle %></strong>
@@ -101,6 +102,10 @@
           </nav>
         </div>
         <div class="media-right">
+          <form action="/restaurants/<%=restaurant._id%>/reviews/<%=review._id%>" method="POST">
+            <button class="button"><i class="fas fa-edit"></i></button>
+            <input type="hidden" name="_method" value="PUT">
+          </form>
           <form action="/restaurants/<%=restaurant._id%>/reviews/<%=review._id%>" method="POST">
             <button class="delete"></button>
             <input type="hidden" name="_method" value="DELETE">
