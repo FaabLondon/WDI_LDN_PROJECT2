@@ -26,7 +26,7 @@ const schema = new mongoose.Schema({
   location: {type: String, required: true},
   priceRange: {type: String, required: true},
   cuisine: {type: String, required: true},
-  description: {type: String, required: true, maxlength: 360},
+  description: {type: String, required: true, maxlength: 380},
   image: {type: String, required: true, pattern: /^https?:\/\/.+/},
   address: {type: String,required: true},
   phone: {type: String, required: true},

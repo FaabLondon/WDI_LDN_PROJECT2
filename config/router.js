@@ -27,9 +27,8 @@ router.route('/restaurants/:id')
 router.route('/restaurants/:id/reviews')
   .post(secureRoute, restaurants.reviewCreate);
 
-//EDIT and DELETE review
+//DELETE review
 router.route('/restaurants/:id/reviews/:reviewId')
-  .get(secureRoute, restaurants.reviewEdit)
   .delete(secureRoute, restaurants.reviewDelete);
 
 

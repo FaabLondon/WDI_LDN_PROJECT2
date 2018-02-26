@@ -78,17 +78,6 @@ function reviewDeleteRoute(req, res, next){
     .catch(next);
 }
 
-function reviewEditRoute(req, res, next){
-  Restaurant.findById(req.params.id)
-    .then(restaurant => {
-      //returns review with certain ID
-      const review = restaurant.reviews.id(req.params.reviewId);
-      //console.log(review);
-      res.render(`/restaurants/${req.params.id}`, {review});
-    })
-    .catch(next);
-}
-
 module.exports = {
   index: indexRoute,
   new: newRoute,
@@ -99,5 +88,4 @@ module.exports = {
   delete: deleteRoute,
   reviewCreate: reviewCreateRoute,
   reviewDelete: reviewDeleteRoute,
-  reviewEdit: reviewEditRoute
 };

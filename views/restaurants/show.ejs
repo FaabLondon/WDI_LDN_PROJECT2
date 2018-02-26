@@ -35,35 +35,38 @@
 
     <%# Review section %>
     <div class="column reviews">
-    <%# form for user to leave a review %>
-      <form action="/restaurants/<%=restaurant._id%>/reviews" method="POST">
-        <article class="media">
-          <figure class="media-left">
-            <p class="image is-4by3">
-              <img src="https://www.fillmurray.com/140/100">
-            </p>
-          </figure>
-          <div class="media-content">
+      <article class="media">
+        <figure class="media-left">
+          <p class="image is-4by3">
+            <img src="https://www.fillmurray.com/140/100">
+          </p>
+        </figure>
+        <div class="media-content">
+          <%# form for user to leave a review %>
+          <form action="/restaurants/<%=restaurant._id%>/reviews" method="POST">
             <div class="field">
               <div class="control">
+                <label class="label">Rating</label>
                 <input name="rating" class="input" type="text" placeholder="Add a rating between 0 and 50...">
                 <%# <span class="icon is-small"><i class="far fa-circle fa-2x"></i><i class="far fa-circle fa-2x"></i><i class="far fa-circle fa-2x"></i><i class="far fa-circle fa-2x"></i><i class="far fa-circle fa-2x"></i></span> %>
               </div>
             </div>
             <div class="field">
               <div class="control">
+                <label class="label">Title</label>
                 <input name="maintitle" class="input" type="text" placeholder="Add a title for your review...">
               </div>
             </div>
             <div class="field">
               <p class="control">
+                <label class="label">Describe your experience</label>
                 <textarea name="content" class="textarea" placeholder="Add a review..."></textarea>
               </p>
             </div>
               <button class="button is-info">Submit</button>
-          </div>
-        </article>
-      </form>
+          </form>
+        </div>
+      </article>
     <br>
     <%# Show previous reviews %>
     <% restaurant.reviews.forEach(review => { %>
@@ -102,10 +105,6 @@
           </nav>
         </div>
         <div class="media-right">
-          <form action="/restaurants/<%=restaurant._id%>/reviews/<%=review._id%>" method="POST">
-            <button class="button"><i class="fas fa-edit"></i></button>
-            <input type="hidden" name="_method" value="PUT">
-          </form>
           <form action="/restaurants/<%=restaurant._id%>/reviews/<%=review._id%>" method="POST">
             <button class="delete"></button>
             <input type="hidden" name="_method" value="DELETE">

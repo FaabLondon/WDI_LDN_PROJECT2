@@ -1,3 +1,3 @@
 $(() => {
-  $('form').validate(); //to activate jquery validate plufon on form validations
+  $('form').validate(); //to activate jquery validate plugin on form validations
 });
