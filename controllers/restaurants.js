@@ -67,9 +67,9 @@ function deleteRoute(req, res, next){
 //newReview for restaurant
 function reviewCreateRoute(req, res, next){
   req.body.user = req.currentUser; //add user to new review - was setup in userAuth
+  req.flash('danger', 'Thank you for your contribution. Our moderators will review your comment and publish it shortly');
   Restaurant.findById(req.params.id)
     .then(restaurant => {
-      req.flash('danger', 'Thank you for your contribution. Our moderators will review your comment and publish it shortly');
       restaurant.reviews.push(req.body);
       return restaurant.save(); //why do we need to RETURN the saved parent collection - it is a callback so needs to be returned otherwise undefined
     })
@@ -85,42 +85,57 @@ function reviewDeleteRoute(req, res, next){
       //returns review with certain ID
       const review = restaurant.reviews.id(req.params.reviewId);
       review.remove();
-      return restaurant.save(); //why do we need to RETURN the saved parent collection?
+      return restaurant.save();
     })
     .then(() => res.redirect(`/restaurants/${req.params.id}`))
     .catch(next);
 }
 
 function moderateShowRoute(req, res, next){
-  Restaurant.find()
-    .populate('reviews')
-    .populate('reviews.user') //had to populate user data in order to see username etc
-    .then(restaurants => {
-      res.render('restaurants/showReview', {restaurants});
-    })
-    .catch(next);
+  if(!req.currentUser.admin){
+    req.flash('danger', 'You do not have the perrmission to moderate');
+    res.redirect('/');
+  } else {
+    Restaurant.find()
+      .populate('reviews')
+      .populate('reviews.user') //had to populate user data in order to see username etc
+      .then(restaurants => {
+        res.render('restaurants/showReview', {restaurants});
+      })
+      .catch(next);
+  }
 }
 
 function moderateDeleteRoute(req, res, next){
-  Restaurant.findById(req.params.id)
-    .then(restaurant => {
-      const review = restaurant.reviews.id(req.params.reviewId);
-      review.remove();
-      return restaurant.save(); //why do we need to RETURN the saved parent collection?
-    })
-    .then(() => moderateShowRoute(req, res, next))
-    .catch(next);
+  if(!req.currentUser.admin){
+    req.flash('danger', 'You do not have the perrmission to moderate');
+    res.redirect('/');
+  } else {
+    Restaurant.findById(req.params.id)
+      .then(restaurant => {
+        const review = restaurant.reviews.id(req.params.reviewId);
+        review.remove();
+        return restaurant.save(); //why do we need to RETURN the saved parent collection?
+      })
+      .then(() => moderateShowRoute(req, res, next))
+      .catch(next);
+  }
 }
 
 function moderateUpdateRoute(req, res, next){
-  Restaurant.findById(req.params.id)
-    .then(restaurant => {
-      const review = restaurant.reviews.id(req.params.reviewId);
-      review.moderated = true;
-      return restaurant.save();
-    })
-    .then(() => moderateShowRoute(req, res, next))
-    .catch(next);
+  if(!req.currentUser.admin){
+    req.flash('danger', 'You do not have the perrmission to moderate');
+    res.redirect('/');
+  } else {
+    Restaurant.findById(req.params.id)
+      .then(restaurant => {
+        const review = restaurant.reviews.id(req.params.reviewId);
+        review.moderated = true;
+        return restaurant.save();
+      })
+      .then(() => moderateShowRoute(req, res, next))
+      .catch(next);
+  }
 }
 
 module.exports = {

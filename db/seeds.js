@@ -9,7 +9,7 @@ mongoose.connect('mongodb://localhost/main-database', (err, db) =>{
   //db.dropDatabase();
   db.dropCollection('restaurants');
 
-  User.findOne({ email: 'faabke@gmail.com' })
+  User.findOne({ admin: true }) //all the seed restaurant will be created by admin
     .then(user => {
       restaurantData = restaurantData.map(restaurant => {
         restaurant.user = user;
