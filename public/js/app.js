@@ -3,18 +3,30 @@ $(() => {
 
   $('form').validate(); //to activate jquery validate plugin on form validations
 
+  //on mouseover on rating circles
   $('.ratingcircle').on('mouseover', function () {
-    $(this)
-      .find('[data-fa-i2svg]')
-      .removeClass('fa-circle')
-      .addClass('fa-dot-circle');
-    const value = ratingValue($(this));
-    $('.rating').attr('value', value);
-    //ensures that the circle before is also checked - so if users hover on 5th circle, then the circle 1, 2, 3 an 4 are also ticked
+    const value = ratingValue($(this)); //this is dividend hovered on
+    $('.rating').attr('value', value); //updates hidden input field in form with value
 
+    //initialise all circles to unchecked
+    $('.ratingcircle').each(function() {
+      $(this) //dividend
+        .find('[data-fa-i2svg]') //finds descendent (svg/i) with that value
+        .removeClass('fa-dot-circle')
+        .addClass('fa-circle');
+    });
 
-
+    //ensures that all circles before is also checked
+    $('.ratingcircle').each(function() {
+      if(ratingValue($(this)) <= value){
+        $(this) //dividend
+          .find('[data-fa-i2svg]') //finds descendent (svg/i) with that value
+          .removeClass('fa-circle')
+          .addClass('fa-dot-circle');
+      }
+    });
   });
+
 
   function ratingValue(obj){
     const startSearch = obj.attr('class').search('rating-') + 7;
