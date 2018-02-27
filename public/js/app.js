@@ -81,8 +81,8 @@ $(() => {
     //adds a half circle on the next circle
     $($('.averageRatingcircle')[counter]).removeClass('circle');
     $($('.averageRatingcircle')[counter]).addClass('dot-half-circle');
-
   }
+
 
   //*************************************************************
   //display review value in circles

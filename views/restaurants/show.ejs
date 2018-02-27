@@ -19,17 +19,21 @@
         <h1 class="is-1"><%= restaurant.name %></h1>
         <p class="subtitle is-6">Location: <%= restaurant.location %></p>
         <div class="averageRating" data-value="<%= restaurant.averageRating %>">
-          Average rating: <%= restaurant.averageRating %>
-          <div class="icon is-medium circle averageRatingcircle rating-1">
-          </div>
-          <div class="icon is-medium circle averageRatingcircle rating-2">
-          </div>
-          <div class="icon is-medium circle averageRatingcircle rating-3">
-          </div>
-          <div class="icon is-medium circle averageRatingcircle rating-4">
-          </div>
-          <div class="icon is-medium circle averageRatingcircle rating-5">
-          </div>
+          <% if(restaurant.averageRating !== 0) { %>
+            <p>Average rating: <%= restaurant.averageRating %></p>
+            <div class="icon is-medium circle averageRatingcircle rating-1">
+            </div>
+            <div class="icon is-medium circle averageRatingcircle rating-2">
+            </div>
+            <div class="icon is-medium circle averageRatingcircle rating-3">
+            </div>
+            <div class="icon is-medium circle averageRatingcircle rating-4">
+            </div>
+            <div class="icon is-medium circle averageRatingcircle rating-5">
+            </div>
+          <% } else {%>
+            <p>No rating yet</p>
+            <%} %>
         </div>
         <div class="content">
           <p class="subtitle is-6">Price range: <%= restaurant.priceRange %></p>
@@ -112,7 +116,7 @@
               <strong><%= review.user.username %></strong>
             <% } %>
           </figure>
-      
+
           <div class="media-content">
             <div class="content">
               <p>

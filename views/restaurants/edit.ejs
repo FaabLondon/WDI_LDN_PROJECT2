@@ -22,10 +22,10 @@
         <div class="select" >
           <select name="priceRange" value="<%= restaurant.priceRange %>" required>
             <option disabled>Select price range</option>
-            <option value="£">£</option>
-            <option value="££">££</option>
-            <option value="£££">£££</option>
-            <option value="££££">££££</option>
+            <option value="£" <%if (restaurant.priceRange === '£') { %> selected <%}%>>£</option>
+            <option value="££" <%if (restaurant.priceRange === '££') { %> selected <%}%>>££</option>
+            <option value="£££" <%if (restaurant.priceRange === '£££') { %> selected <%}%>>£££</option>
+            <option value="££££" <%if (restaurant.priceRange === '££££') { %> selected <%}%>>££££</option>
           </select>
         </div>
       </div>
