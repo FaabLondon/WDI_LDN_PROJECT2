@@ -16,8 +16,6 @@ function indexRoute(req, res, next){
   });
 }
 
-
-
 //SHOW route for restaurants
 function showRoute(req, res, next){
   Restaurant.findById(req.params.id)
@@ -95,7 +93,7 @@ function reviewDeleteRoute(req, res, next){
 function moderateShowRoute(req, res, next){
   Restaurant.find()
     .populate('reviews')
-    //.populate('user') //had to populate user data in order to get access to restaurant.user._id
+    .populate('reviews.user') //had to populate user data in order to see username etc
     .then(restaurants => {
       res.render('restaurants/showReview', {restaurants});
     })

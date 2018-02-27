@@ -47,14 +47,22 @@
           <%# form for user to leave a review %>
           <form action="/restaurants/<%=restaurant._id%>/reviews" method="POST">
             <div class="field">
-              <div class="control">
-                <label class="label">Rating</label>
-                <input name="rating" class="input" type="text" placeholder="Add a rating between 0 and 50..." required min="0" max="50">
-              </div>
-            </div>
-            <div class="field">
-                <input name="rating" type="hidden" value="">
-                <div class="icon is-small rating"><i class="far fa-circle fa-2x rating-10 ratingcircle"></i><i class="far fa-circle fa-2x rating-20 ratingcircle"></i><i class="far fa-circle fa-2x rating-30 ratingcircle"></i><i class="far fa-circle fa-2x rating-40 ratingcircle"></i><i class="far fa-circle fa-2x rating-50 ratingcircle"></i></div>
+              <input class="rating" name="rating" type="hidden" value="">
+                  <div class="icon is-medium ratingcircle rating-10">
+                    <i class="far fa-circle fa-2x "></i>
+                  </div>
+                  <div class="icon is-medium ratingcircle rating-20">
+                    <i class="far fa-circle fa-2x "></i>
+                  </div>
+                  <div class="icon is-medium ratingcircle rating-30">
+                    <i class="far fa-circle fa-2x"></i>
+                  </div>
+                  <div class="icon is-medium ratingcircle rating-40">
+                    <i class="far fa-circle fa-2x "></i>
+                  </div>
+                  <div class="icon is-medium ratingcircle rating-50">
+                    <i class="far fa-circle fa-2x "></i>
+                  </div>
             </div>
             <div class="field">
               <div class="control">
