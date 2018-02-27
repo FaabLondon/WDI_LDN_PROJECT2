@@ -43,8 +43,30 @@ const schema = new mongoose.Schema({
 
 //add methods to check wether a restaurant is owned by a certain user
 schema.methods.isOwnedBy = function(user){ //pass in logged in User
-  // (typeof this.user === 'undefined' || user === 'undefined') 
+  // (typeof this.user === 'undefined' || user === 'undefined')
   return this.user && user._id.equals(this.user._id);   //.this is the restaurant
 };
+
+//add virtual to calculate average rating
+//loop through the array of reviews and return the average
+schema
+  .virtual('averageRating') //Name of the virtual
+  .get(function getaverageRating() {
+    let prod = 1;
+    const nbReviews = this.reviews.length;
+    this.reviews.forEach(obj => {
+      prod = prod + obj['rating'];
+    });
+    return 10 * Math.round(prod / nbReviews / 10);
+  });
+
+//add virtual to generate distinct locations - did not work as attached to each restaurant and not restaurants so could not show it on the index page.
+// schema
+//   .virtual('distinctLocations') //Name of the virtual
+//   .get(function getdistinctLocations() { //it gets data from the DB
+//     return this.find().distinct('location');
+//   });
+
+
 
 module.exports = mongoose.model('Restaurant', schema);

@@ -17,11 +17,12 @@ function indexRoute(req, res, next){
 }
 
 //SHOW route for restaurants
+//Populate : //to make sure to get the data for the referenced record when we retrieve the data from the database. Otherwise just gets ID - It search for user attached to reviews array and populates it. It  means that it replaces ID by user object
 function showRoute(req, res, next){
   Restaurant.findById(req.params.id)
-    .populate('reviews.user') //to make sure to get the data for the referenced record when we retrieve the data from the database. Otherwise just gets ID
-    //search for user attached to reviews array and populates it. It  means that it replaces ID by user object
     .populate('user') //had to populate user data in order to get access to restaurant.user._id
+    .populate('reviews.user')
+    .then()
     .then(restaurant => res.render('restaurants/show', {restaurant}))
     .catch(next);
 }

@@ -4,12 +4,39 @@
       <figure class="image">
         <img src="<%= restaurant.image %>" alt="<%= restaurant.name %>">
       </figure>
+      <br>
+      <%# google map %
+      <div class="container googleMaps">
+        <iframe
+          width="560"
+          height="200"
+          frameborder="0" style="border:0"
+          src="<%=`https://www.google.com/maps/embed/v1/place?key=AIzaSyDln8898bxuHv1pmJNbNsvXUoCVjBMNWIc&q=Space+Needle,${encodeURI(restaurant.address)}`%>" allowfullscreen>
+        </iframe>
+      </div>
     </div>
     <div class="column is-half">
       <div class="content">
         <h1 class="is-1"><%= restaurant.name %></h1>
-        <p class="subtitle is-6"><%= restaurant.location %></p>
-        <p class="subtitle is-6">Reviews</p>
+        <p class="subtitle is-6">Location: <%= restaurant.location %></p>
+        <p class="subtitle is-6">Average rating: <%= restaurant.averageRating %></p>
+        <div class="averageRating" data-value="<%= restaurant.averageRating %>">
+          <div class="icon is-medium averageRatingcircle rating-10">
+            <i class="far fa-circle fa-2x "></i>
+          </div>
+          <div class="icon is-medium averageRatingcircle rating-20">
+            <i class="far fa-circle fa-2x "></i>
+          </div>
+          <div class="icon is-medium averageRatingcircle rating-30">
+            <i class="far fa-circle fa-2x "></i>
+          </div>
+          <div class="icon is-medium averageRatingcircle rating-40">
+            <i class="far fa-circle fa-2x "></i>
+          </div>
+          <div class="icon is-medium averageRatingcircle rating-50">
+            <i class="far fa-circle fa-2x "></i>
+          </div>
+        </div>
         <div class="content">
           <p class="subtitle is-6">Price range: <%= restaurant.priceRange %></p>
           <p class="subtitle is-6">Cuisine: <%= restaurant.cuisine %></p>
@@ -47,22 +74,25 @@
           <%# form for user to leave a review %>
           <form action="/restaurants/<%=restaurant._id%>/reviews" method="POST">
             <div class="field">
-              <input class="rating" name="rating" type="hidden" value="">
-                  <div class="icon is-medium ratingcircle rating-10">
-                    <i class="far fa-circle fa-2x "></i>
-                  </div>
-                  <div class="icon is-medium ratingcircle rating-20">
-                    <i class="far fa-circle fa-2x "></i>
-                  </div>
-                  <div class="icon is-medium ratingcircle rating-30">
-                    <i class="far fa-circle fa-2x"></i>
-                  </div>
-                  <div class="icon is-medium ratingcircle rating-40">
-                    <i class="far fa-circle fa-2x "></i>
-                  </div>
-                  <div class="icon is-medium ratingcircle rating-50">
-                    <i class="far fa-circle fa-2x "></i>
-                  </div>
+              <div class="control">
+                <label class="label">Please add a rating</label>
+                  <input class="rating" name="rating" type="hidden" value="">
+                      <div class="icon is-medium ratingcircle rating-10">
+                        <i class="far fa-circle fa-2x "></i>
+                      </div>
+                      <div class="icon is-medium ratingcircle rating-20">
+                        <i class="far fa-circle fa-2x "></i>
+                      </div>
+                      <div class="icon is-medium ratingcircle rating-30">
+                        <i class="far fa-circle fa-2x "></i>
+                      </div>
+                      <div class="icon is-medium ratingcircle rating-40">
+                        <i class="far fa-circle fa-2x "></i>
+                      </div>
+                      <div class="icon is-medium ratingcircle rating-50">
+                        <i class="far fa-circle fa-2x "></i>
+                      </div>
+              </div>
             </div>
             <div class="field">
               <div class="control">
