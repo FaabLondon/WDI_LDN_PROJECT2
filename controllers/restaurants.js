@@ -1,13 +1,13 @@
 //Controller will combine DB (Models) and views
 
 const Restaurant = require('../models/restaurant');
+const ejsHelpers = require('../public/js/ejs_helpers.js');
 
 //INDEX route for restaurants
 function indexRoute(req, res, next){
   Restaurant.find().distinct('location', (err, locations) => {
     Restaurant.find().distinct('cuisine', (err, cuisines) => {
       Restaurant.find().distinct('priceRange', (err, priceRanges) => {
-        console.log(req.query);
         Restaurant.find(req.query)
           .then(restaurants => res.render('restaurants/index', {restaurants, locations, cuisines, priceRanges}))
           .catch(next);
@@ -23,7 +23,7 @@ function showRoute(req, res, next){
     .populate('user') //had to populate user data in order to get access to restaurant.user._id
     .populate('reviews.user')
     .then()
-    .then(restaurant => res.render('restaurants/show', {restaurant}))
+    .then(restaurant => res.render('restaurants/show', {restaurant, ejsHelpers}))
     .catch(next);
 }
 

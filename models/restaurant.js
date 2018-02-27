@@ -52,12 +52,17 @@ schema.methods.isOwnedBy = function(user){ //pass in logged in User
 schema
   .virtual('averageRating') //Name of the virtual
   .get(function getaverageRating() {
-    let prod = 1;
-    const nbReviews = this.reviews.length;
-    this.reviews.forEach(obj => {
-      prod = prod + obj['rating'];
+    let sum = 0;
+    const filteredArray = this.reviews.filter((elt) => {
+      return elt.moderated === true;
     });
-    return 10 * Math.round(prod / nbReviews / 10);
+    const nbReviewsModerated = filteredArray.length;
+    if (nbReviewsModerated !== 0){
+      filteredArray.forEach(obj => {
+        sum = sum + obj['rating'];
+      });
+      return Math.round(sum / nbReviewsModerated * 2)/2;
+    } else return 0;
   });
 
 //add virtual to generate distinct locations - did not work as attached to each restaurant and not restaurants so could not show it on the index page.

@@ -1,6 +1,6 @@
 .homepage{
-    background-image: url(http://cdn.mntm.me/29/58/f1/Culinary-Adventures-Places-to-Eat-in-San-Diego-2958f16069e240f084e19ae45b0b3b6d.jpg);
-    background-size: cover;
+    // background-image: url(http://cdn.mntm.me/29/58/f1/Culinary-Adventures-Places-to-Eat-in-San-Diego-2958f16069e240f084e19ae45b0b3b6d.jpg);
+    // background-size: cover;
 }
 
 .showButtons{
@@ -11,6 +11,23 @@
   margin-left: 10px;
   }
 }
+
+.circle{
+  background-image: url(https://i.imgur.com/DVEpwbs.png);
+  background-size: cover;
+}
+
+.dot-circle{
+  background-image: url(https://i.imgur.com/brSWUvL.png);
+  background-size: cover;
+}
+
+.dot-half-circle{
+  background-image: url(https://i.imgur.com/llhEDjE.png);
+  background-size: cover;
+}
+
+
 
 .rating{
   margin-left: 70px;
