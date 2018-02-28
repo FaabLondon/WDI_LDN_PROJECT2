@@ -5,13 +5,7 @@
         <img src="<%= restaurant.image %>" alt="<%= restaurant.name %>">
       </figure>
       <br>
-      <div class="container googleMaps">
-        <iframe
-          width="560"
-          height="200"
-          frameborder="0" style="border:0"
-          src="<%=`https://www.google.com/maps/embed/v1/place?key=AIzaSyDln8898bxuHv1pmJNbNsvXUoCVjBMNWIc&q=Space+Needle,${encodeURI(restaurant.address)}`%>" allowfullscreen>
-        </iframe>
+      <div id="map" class="container">
       </div>
     </div>
     <div class="column is-half">
@@ -41,7 +35,7 @@
         </div>
         <p class="subtitle is-6"><%= restaurant.description %></p>
         <span class="icon is-small"><i class="fas fa-map-marker"></i></span>
-        <span><%= restaurant.address %>&nbsp</span>
+        <span id="restaurantAddress"><%= restaurant.address %>&nbsp</span>
         <span class="icon is-small"><i class="fas fa-phone"></i></span>
         <span><%= restaurant.phone %>&nbsp</span>
         <span class="icon is-small"><i class="fas fa-desktop"></i></span>
