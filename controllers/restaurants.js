@@ -3,17 +3,38 @@
 const Restaurant = require('../models/restaurant');
 const ejsHelpers = require('../public/js/ejs_helpers.js');
 
+const Promise = require('bluebird');
+
 //INDEX route for restaurants
 function indexRoute(req, res, next){
-  Restaurant.find().distinct('location', (err, locations) => {
-    Restaurant.find().distinct('cuisine', (err, cuisines) => {
-      Restaurant.find().distinct('priceRange', (err, priceRanges) => {
-        Restaurant.find(req.query)
-          .then(restaurants => res.render('restaurants/index', {restaurants, locations, cuisines, priceRanges}))
-          .catch(next);
+  // Restaurant.find().distinct('location', (err, locations) => {
+  //   Restaurant.find().distinct('cuisine', (err, cuisines) => {
+  //     Restaurant.find().distinct('priceRange', (err, priceRanges) => {
+  //       Restaurant.find(req.query)
+  //         .then(restaurants => res.render('restaurants/index', {restaurants, locations, cuisines, priceRanges}))
+  //         .catch(next);
+  //     });
+  //   });
+  // });
+  console.log(req.query);
+  Promise.props({
+    allRestaurants: Restaurant.find(),
+    restaurants: Restaurant.find(req.query)
+  })
+
+    .then(data => {
+
+      ['location', 'cuisine', 'priceRange'].forEach(key => {
+        data[`${key}s`] = Array.from(new Set(data.allRestaurants.map(restaurant => restaurant[key])));
+        data[`selected${key}`] = typeof req.query[key] === 'string' ? req.query[key].split(): req.query[key] ; //store the selected data
       });
-    });
-  });
+      //add some helpers to store which checkbox was checked after page reload
+      // console.log(data['selectedlocation']);
+      // console.log(data['selectedcuisine']);
+      // console.log(data['selectedpriceRange']);
+      res.render('restaurants/index', data);
+    })
+    .catch(next);
 }
 
 //SHOW route for restaurants
@@ -93,7 +114,7 @@ function reviewDeleteRoute(req, res, next){
 
 function moderateShowRoute(req, res, next){
   if(!req.currentUser.admin){
-    req.flash('danger', 'You do not have the perrmission to moderate');
+    req.flash('danger', 'You do not have the permission to moderate');
     res.redirect('/');
   } else {
     Restaurant.find()
@@ -108,7 +129,7 @@ function moderateShowRoute(req, res, next){
 
 function moderateDeleteRoute(req, res, next){
   if(!req.currentUser.admin){
-    req.flash('danger', 'You do not have the perrmission to moderate');
+    req.flash('danger', 'You do not have the permission to moderate');
     res.redirect('/');
   } else {
     Restaurant.findById(req.params.id)
@@ -124,7 +145,7 @@ function moderateDeleteRoute(req, res, next){
 
 function moderateUpdateRoute(req, res, next){
   if(!req.currentUser.admin){
-    req.flash('danger', 'You do not have the perrmission to moderate');
+    req.flash('danger', 'You do not have the permission to moderate');
     res.redirect('/');
   } else {
     Restaurant.findById(req.params.id)

@@ -16,16 +16,14 @@
     </div>
     <div class="field">
       <label class="label">Price range</label>
-      <div class="control">
-        <div class="select" >
+      <div class="control select">
           <select name="priceRange" required>
-            <option disabled>Select price range</option>
+            <option value="">Select price range</option>
             <option value="£">£</option>
             <option value="££">££</option>
             <option value="£££">£££</option>
             <option value="££££">££££</option>
           </select>
-        </div>
       </div>
     </div>
     <div class="field">
@@ -43,7 +41,7 @@
     <div class="field">
       <label class="label">Image</label>
       <div class="control">
-        <input name="image" class="input" type="text" placeholder="link to image" required pattern="/^https?:\/\/.+/">
+        <input name="image" class="input" type="url" placeholder="link to image" required >
       </div>
     </div>
     <div class="field">
@@ -54,16 +52,16 @@
       </div>
     </div>
     <div class="field">
-      <label class="label">Phone</label>
+      <label class="label">Phone (in the  form xxx-xxxx-xxxx)</label>
       <div class="control has-icons-left">
-        <input name="phone" class="input" type="text" placeholder="Phone Number" required>
+        <input name="phone" class="input" type="tel" placeholder="Phone Number" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" required>
         <span class="icon is-small"><i class="fas fa-phone"></i></span>
       </div>
     </div>
     <div class="field">
       <label class="label">Website</label>
       <div class="control has-icons-left">
-        <input name="website" class="input" type="text" placeholder="Website" required pattern="/^https?:\/\/.+/">
+        <input name="website" class="input" type="url" placeholder="Website" required>
         <span class="icon is-small"><i class="fas fa-desktop"></i></span>
       </div>
     </div>

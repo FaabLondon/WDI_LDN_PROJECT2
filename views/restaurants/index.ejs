@@ -9,7 +9,8 @@
           <% locations.forEach(location => { %>
             <div class="field">
               <label class="checkbox">
-                <input type="checkbox" name="location" value="<%= location %>">
+                <input type="checkbox" name="location" value="<%= location %>"
+                <%if (typeof selectedlocation !== 'undefined' && selectedlocation.includes(location)) {%> checked <%}%> onchange="this.form.submit()">
                 <%= location %>
               </label>
             </div>
@@ -18,7 +19,9 @@
           <% cuisines.forEach(cuisine => { %>
             <div class="field">
               <label class="checkbox">
-                <input type="checkbox" name="cuisine" value="<%= cuisine %>">
+                <input type="checkbox" name="cuisine" value="<%= cuisine %>"
+                <%if (typeof selectedcuisine !== 'undefined' &&
+                selectedcuisine.includes(cuisine)) {%> checked <%}%> onchange="this.form.submit()">
                 <%= cuisine %>
               </label>
             </div>
@@ -27,13 +30,14 @@
           <% priceRanges.forEach(priceRange => { %>
             <div class="field">
               <label class="checkbox">
-                <input type="checkbox" name="priceRange" value="<%= priceRange %>" >
+                <input type="checkbox" name="priceRange" value="<%= priceRange %>"
+                <%if (typeof selectedpriceRange !== 'undefined' &&
+                selectedpriceRange.includes(priceRange)) {%> checked <%}%> onchange="this.form.submit()">
                 <%= priceRange %>
               </label>
             </div>
           <% }) %>
         </div>
-        <button class="button">Search</button>
       </form>
     </div>
 

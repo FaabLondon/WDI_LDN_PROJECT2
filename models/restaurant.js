@@ -30,13 +30,25 @@ reviewSchema.methods.isOwnedBy = function(user){ //pass in logged in User
 const schema = new mongoose.Schema({
   name: {type: String, required: true, unique: true},
   location: {type: String, required: true},
-  priceRange: {type: String, required: true},
+  priceRange: {type: String, required: true, enum: ['£', '££', '£££', '££££']},
   cuisine: {type: String, required: true},
   description: {type: String, required: true, maxlength: 380},
-  image: {type: String, required: true, pattern: /^https?:\/\/.+/},
+  image: {
+    type: String,
+    required: true,
+    validate: image => /https?:\/\/.+/.test(image)
+  },
   address: {type: String,required: true},
-  phone: {type: String, required: true},
-  website: {type: String, required: true, pattern: /^https?:\/\/.+/},
+  phone: {
+    type: String,
+    required: true
+    // validate: phone => /[0-9]{3}-[0-9]{4}-[0-9]{4}/.test(phone) //does not work
+  },
+  website: {
+    type: String,
+    required: true,
+    validate: image => /https?:\/\/.+/.test(image)
+  },
   reviews: [reviewSchema],
   user: { type: mongoose.Schema.ObjectId, ref: 'User'}
 });

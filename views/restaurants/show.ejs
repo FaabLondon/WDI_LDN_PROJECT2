@@ -121,15 +121,15 @@
             <div class="content">
               <p>
                   <div class="reviewRating" data-value="<%= review.rating %>">
-                    <div class="icon is-medium circle reviewcircle rating-1">
+                    <div class="icon is-medium circle reviewcircle rating-1 <% if(review.rating >= 1) {%> dot-circle <%}%>">
                     </div>
-                    <div class="icon is-medium circle reviewcircle rating-2">
+                    <div class="icon is-medium circle reviewcircle rating-2 <% if(review.rating >= 2) {%> dot-circle <%}%>">
                     </div>
-                    <div class="icon is-medium circle reviewcircle rating-3">
+                    <div class="icon is-medium circle reviewcircle rating-3 <% if(review.rating >= 3) {%> dot-circle <%}%>">
                     </div>
-                    <div class="icon is-medium circle reviewcircle rating-4">
+                    <div class="icon is-medium circle reviewcircle rating-4 <% if(review.rating >= 4) {%> dot-circle <%}%>">
                     </div>
-                    <div class="icon is-medium circle reviewcircle rating-5">
+                    <div class="icon is-medium circle reviewcircle rating-5 <% if(review.rating >= 5) {%> dot-circle <%}%>">
                     </div>
                   </div>
                   <small><%= review.formattedDate %></small>
@@ -154,7 +154,7 @@
             </nav>
           </div>
           <div class="media-right">
-            <% if (review.isOwnedBy(locals.currentUser)) {%>
+            <% if (locals.isAuthenticated && review.isOwnedBy(locals.currentUser)) {%>
               <form action="/restaurants/<%=restaurant._id%>/reviews/<%=review._id%>" method="POST">
                 <button class="delete"></button>
                 <input type="hidden" name="_method" value="DELETE">

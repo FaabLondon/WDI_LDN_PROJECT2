@@ -5,37 +5,11 @@ $(() => {
 
   //***************** SLICK CARROUSEL ******************************
   // $(document).ready(function(){
-  $('.responsive').slick({
+  $('.carrousel').slick({
     dots: true,
-    infinite: false,
-    speed: 300,
-    slidesToShow: 4,
-    slidesToScroll: 4,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          infinite: true,
-          dots: true
-        }
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2
-        }
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1
-        }
-      }
-    ]
+    infinite: true,
+    speed: 500,
+    autoplay: true
   });
   // });
 
@@ -87,16 +61,16 @@ $(() => {
   //*************************************************************
   //display review value in circles
 
-  const valueReview = $('.reviewRating').attr('data-value'); //Returns the review value
-
-  //loop through all div/circles
-  $('.reviewcircle').each(function() {
-    if(ratingValue($(this)) <= valueReview){ // each dividend
-      $(this)
-        .removeClass('circle')
-        .addClass('dot-circle');
-    }
-  });
+  // const valueReview = $('.reviewRating').attr('data-value'); //Returns the review value
+  //
+  // //loop through all div/circles
+  // $('.reviewcircle').each(function() {
+  //   if(ratingValue($(this)) <= valueReview){ // each dividend
+  //     $(this)
+  //       .removeClass('circle')
+  //       .addClass('dot-circle');
+  //   }
+  // });
 
 
   //*************************************************************
