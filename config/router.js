@@ -6,7 +6,8 @@ const session = require('../controllers/sessions');
 const secureRoute = require('../lib/secureRoute');
 
 //Request listener to serve home template
-router.get('/', (req, res) => res.render('pages/home'));
+router.route('/')
+  .get(restaurants.homepage);
 
 //INDEX and CREATE route
 router.route('/restaurants')

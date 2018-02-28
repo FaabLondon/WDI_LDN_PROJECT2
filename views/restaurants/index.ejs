@@ -1,6 +1,7 @@
 <main class="container indexpage">
   <div class="columns is-multiline">
 
+  <!-- Could refactor these 3 filters with a loop if time -->
     <div class="column is-one-third-desktop">
       <form action="/restaurants" method="GET">
         <div class="content">
@@ -49,7 +50,8 @@
               <div class="card">
                 <div class="card-image">
                   <figure class="image">
-                    <img src="<%=restaurant.image%>" alt="<%=restaurant.name%>">
+                    <div class="imgRestaurant" style="background: url(<%=restaurant.image%>)">
+                    </div>
                   </figure>
                 </div>
                 <div class="card-content">

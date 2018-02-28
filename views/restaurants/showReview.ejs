@@ -34,20 +34,22 @@
                     <br>
                     Content: <%= review.content %>
                   </p>
+                    <strong class="has-text-danger">AWAITING MODERATION</strong>
                 </div>
               </div>
-              <div class="media-right">
-                <form action="/moderate/<%=restaurant._id%>/reviews/<%=review._id%>" method="POST">
-                  <button class="delete"></button>
-                  <input type="hidden" name="_method" value="DELETE">
-                </form>
-                <a href="/moderate/<%=restaurant._id%>/reviews/<%=review._id%>" class="button is-small">
-                  <span class="icon is-small">
-                    <i class="fas fa-check"></i>
-                  </span>
-                </a>
-                <br>
-                <strong>"AWAITING VALIDATION"</strong>
+              <div class="media-right moderationButtons">
+                  <form action="/moderate/<%=restaurant._id%>/reviews/<%=review._id%>" method="POST">
+                    <p>Delete</p>
+                    <button class="delete"></button>
+                    <input type="hidden" name="_method" value="DELETE">
+                  </form>
+                  <br>
+                    <p>Validate</p>
+                  <a href="/moderate/<%=restaurant._id%>/reviews/<%=review._id%>" class="button is-small">
+                    <div class="icon is-small">
+                      <i class="fas fa-check"></i>
+                    </div>
+                  </a>
               </div>
             </article>
           <% } %>

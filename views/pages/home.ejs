@@ -1,10 +1,11 @@
 <section class="hero is-medium homepage">
-  <h1 class="title is-1 has-text-white has-text-centered">Find your perfect kid-friendly restaurants and cafes</h1>
   <div class="carrousel">
-    <div> <img src="http://cdn.mntm.me/29/58/f1/Culinary-Adventures-Places-to-Eat-in-San-Diego-2958f16069e240f084e19ae45b0b3b6d.jpg" alt=""> </div>
-    <div> <img src="http://cdn.mntm.me/29/58/f1/Culinary-Adventures-Places-to-Eat-in-San-Diego-2958f16069e240f084e19ae45b0b3b6d.jpg" alt=""> </div>
-    <div> <img src="http://cdn.mntm.me/29/58/f1/Culinary-Adventures-Places-to-Eat-in-San-Diego-2958f16069e240f084e19ae45b0b3b6d.jpg" alt=""> </div>
+    <% restaurants.forEach(restaurant => { %>
+    <div class="imgCarrousel" style="background: url(<%=restaurant.image%>)">
+    </div>
+    <% }) %>
   </div>
+  <h1 class="title is-1 has-text-grey has-text-centered">Find your perfect kid-friendly restaurants and cafes</h1>
 </section>
 
 <section class="section">

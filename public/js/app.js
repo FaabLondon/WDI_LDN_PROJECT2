@@ -4,14 +4,19 @@ $(() => {
   $('form').validate(); //to activate jquery validate plugin on form validations
 
   //***************** SLICK CARROUSEL ******************************
-  // $(document).ready(function(){
+
   $('.carrousel').slick({
     dots: true,
     infinite: true,
     speed: 500,
-    autoplay: true
+    autoplay: true,
+    slidesToShow: 3,
+    centerMode: true
+    // centerPadding: '20px',
+    //variableWidth: true
   });
-  // });
+
+  // $('.homepageTitle').slick();
 
   //*************************************************************
   //on mouseover on rating circles

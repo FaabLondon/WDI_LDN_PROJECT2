@@ -1,38 +1,27 @@
 //Controller will combine DB (Models) and views
-
 const Restaurant = require('../models/restaurant');
-const ejsHelpers = require('../public/js/ejs_helpers.js');
-
 const Promise = require('bluebird');
+
+//homepage
+function homepageRoute(req, res, next) {
+  Restaurant.find()
+    .then(restaurants => res.render('pages/home', {restaurants}))
+    .catch(next);
+}
 
 //INDEX route for restaurants
 function indexRoute(req, res, next){
-  // Restaurant.find().distinct('location', (err, locations) => {
-  //   Restaurant.find().distinct('cuisine', (err, cuisines) => {
-  //     Restaurant.find().distinct('priceRange', (err, priceRanges) => {
-  //       Restaurant.find(req.query)
-  //         .then(restaurants => res.render('restaurants/index', {restaurants, locations, cuisines, priceRanges}))
-  //         .catch(next);
-  //     });
-  //   });
-  // });
   console.log(req.query);
   Promise.props({
     allRestaurants: Restaurant.find(),
     restaurants: Restaurant.find(req.query)
   })
-
     .then(data => {
-
       ['location', 'cuisine', 'priceRange'].forEach(key => {
         data[`${key}s`] = Array.from(new Set(data.allRestaurants.map(restaurant => restaurant[key])));
         data[`selected${key}`] = typeof req.query[key] === 'string' ? req.query[key].split(): req.query[key] ; //store the selected data
       });
-      //add some helpers to store which checkbox was checked after page reload
-      // console.log(data['selectedlocation']);
-      // console.log(data['selectedcuisine']);
-      // console.log(data['selectedpriceRange']);
-      res.render('restaurants/index', data);
+      res.render('restaurants/index', data); //Object of variable I want to pass in render
     })
     .catch(next);
 }
@@ -43,8 +32,7 @@ function showRoute(req, res, next){
   Restaurant.findById(req.params.id)
     .populate('user') //had to populate user data in order to get access to restaurant.user._id
     .populate('reviews.user')
-    .then()
-    .then(restaurant => res.render('restaurants/show', {restaurant, ejsHelpers}))
+    .then(restaurant => res.render('restaurants/show', {restaurant}))
     .catch(next);
 }
 
@@ -160,6 +148,7 @@ function moderateUpdateRoute(req, res, next){
 }
 
 module.exports = {
+  homepage: homepageRoute,
   index: indexRoute,
   new: newRoute,
   show: showRoute,
@@ -173,3 +162,14 @@ module.exports = {
   moderateDelete: moderateDeleteRoute,
   moderateUpdate: moderateUpdateRoute
 };
+
+//OLD INDEX ROUTE WITH CALLBACK HELL ;)
+// Restaurant.find().distinct('location', (err, locations) => {
+//   Restaurant.find().distinct('cuisine', (err, cuisines) => {
+//     Restaurant.find().distinct('priceRange', (err, priceRanges) => {
+//       Restaurant.find(req.query)
+//         .then(restaurants => res.render('restaurants/index', {restaurants, locations, cuisines, priceRanges}))
+//         .catch(next);
+//     });
+//   });
+// });
