@@ -1,8 +1,8 @@
 <main class="container indexpage">
-  <div class="columns is-multiline">
+  <div class="columns is-multiline is-mobile">
 
   <!-- Could refactor these 3 filters with a loop if time -->
-    <div class="column is-one-third-desktop">
+    <div class="column is-one-quarter-desktop is-one-third-tablet is-one-half-mobile">
       <form action="/restaurants" method="GET">
         <div class="content">
           <h2 class="is-2">Select your search criteria:</h2>
@@ -42,10 +42,10 @@
       </form>
     </div>
 
-    <div class="column is-two-thirds-desktop">
-      <div class="columns is-multiline">
+    <div class="column column is-three-quarters-desktop is-two-thirds-tablet is-one-half-mobile">
+      <div class="columns is-multiline is-mobile">
         <% restaurants.forEach(restaurant => { %>
-          <div class="column is-half-desktop">
+          <div class="column is-one-third-desktop is-half-tablet is-full-mobile restaurantCard">
             <a href="/restaurants/<%= restaurant._id %>">
               <div class="card">
                 <div class="card-image">

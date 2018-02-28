@@ -27,6 +27,9 @@
   background: transparent no-repeat center;
   background-size: cover; }
 
+.restaurantCard {
+  height: 500px; }
+
 /* Carrousel settings */
 .carrousel .imgCarrousel {
   height: 300px;
