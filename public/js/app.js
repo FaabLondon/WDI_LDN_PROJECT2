@@ -62,22 +62,6 @@ $(() => {
     $($('.averageRatingcircle')[counter]).addClass('dot-half-circle');
   }
 
-
-  //*************************************************************
-  //display review value in circles
-
-  // const valueReview = $('.reviewRating').attr('data-value'); //Returns the review value
-  //
-  // //loop through all div/circles
-  // $('.reviewcircle').each(function() {
-  //   if(ratingValue($(this)) <= valueReview){ // each dividend
-  //     $(this)
-  //       .removeClass('circle')
-  //       .addClass('dot-circle');
-  //   }
-  // });
-
-
   //*************************************************************
   //function returns the value of the rating based on which circle is hovered on
   function ratingValue(obj){
@@ -86,5 +70,16 @@ $(() => {
   }
 
   //*************************************************************
+
+  //to activate burger menu on mobile
+  // Add a click event on each burger menu
+  $('.navbar-burger').on('click', function () {
+    // Get the target from the "data-target" attribute
+    var target = $(this).attr('data-target');
+    var $target = $(target);
+    // Toggle the class on both the "navbar-burger" and the "navbar-menu"
+    //$(this).toggle('is-active');
+    $target.toggle('is-active');
+  });
 
 });
