@@ -1,4 +1,4 @@
-<nav class="navbar is-light">
+<nav class="navbar">
   <div class="navbar-brand">
     <a class="navbar-item" href="/">
       <img src="https://cdn2.iconfinder.com/data/icons/kids-glyph-black/2048/5505_-_Eating_Food-256.png" alt="Kid&Cie">
@@ -15,17 +15,15 @@
 
   <div id="mobile-menu" class="navbar-menu">
     <div class="navbar-start">
-      <% if(!locals.isAuthenticated) { %>
-        <a class="navbar-item" href="/restaurants">Restaurants</a>
-      <% } else { %>
-        <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link" href="/restaurants"> Restaurants</a>
-          <div class="navbar-dropdown is-boxed">
-            <a class="navbar-item" href="/restaurants"> See restaurants</a>
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link" href="/restaurants"> Restaurants</a>
+        <div class="navbar-dropdown is-boxed">
+          <a class="navbar-item" href="/restaurants"> Search restaurants</a>
+          <% if(locals.isAuthenticated) {%>
             <a class="navbar-item" href="/restaurants/new">Add a restaurant</a>
-          </div>
+          <% } %>
         </div>
-      <% } %>
+      </div>
     </div>
 
     <div class="navbar-end">

@@ -5,7 +5,7 @@
     <div class="column is-one-quarter-desktop is-one-third-tablet is-one-half-mobile">
       <form action="/restaurants" method="GET">
         <div class="content">
-          <h2 class="is-2">Select your search criteria:</h2>
+          <h3 class="subtitle is-size-3-desktop is-size-5-touch">Your selections</h3>
           <h2 class="is-2">Location</h2>
           <% locations.forEach(location => { %>
             <div class="field">
@@ -45,9 +45,9 @@
     <div class="column column is-three-quarters-desktop is-two-thirds-tablet is-one-half-mobile">
       <div class="columns is-multiline is-mobile">
         <% restaurants.forEach(restaurant => { %>
-          <div class="column is-one-third-desktop is-half-tablet is-full-mobile restaurantCard">
+          <div class="column is-one-third-desktop is-half-tablet is-full-mobile">
             <a href="/restaurants/<%= restaurant._id %>">
-              <div class="card">
+              <div class="card restaurantCard">
                 <div class="card-image">
                   <figure class="image">
                     <div class="imgRestaurant" style="background: url(<%=restaurant.image%>)">
@@ -55,11 +55,28 @@
                   </figure>
                 </div>
                 <div class="card-content">
-                  <h4 class="subtitle is-4"><%= restaurant.name %></h4>
-                  <h6 class="subtitle is-6"><%= restaurant.location %></h6>
-                  <h6 class="subtitle is-6">Reviews</h6>
-                  <h6 class="subtitle is-6"><%= restaurant.priceRange %></h6>
-                  <h6 class="subtitle is-6"><%= restaurant.cuisine %></h6>
+                  <span class="subtitle is-4"><%= restaurant.name %></span>
+                  <br>
+                  <div class="subtitle is-6"><%= restaurant.location %></div>
+                  <span class="subtitle is-6"><%= restaurant.numberReviews %> Reviews</span>
+                  <div class="averageRating">
+                    <% if(restaurant.averageRating !== 0) { %>
+                      <% if(restaurant.averageRating % 1 === 0.5) {%>
+                      <%  halfCircleLocation = Math.floor(restaurant.averageRating) + 1} else {halfCircleLocation = 0} %>
+                        <div class="icon is-medium circle reviewcircle rating-1 <% if(restaurant.averageRating >= 1) {%> dot-circle <%} if(halfCircleLocation === 1) {%> dot-half-circle <%}%>">
+                        </div>
+                        <div class="icon is-medium circle reviewcircle rating-2 <% if(restaurant.averageRating >= 2) {%> dot-circle <%} if(halfCircleLocation === 2) {%> dot-half-circle <%}%>">
+                        </div>
+                        <div class="icon is-medium circle reviewcircle rating-3 <% if(restaurant.averageRating >= 3) {%> dot-circle <%} if(halfCircleLocation === 3) {%> dot-half-circle <%}%>">
+                        </div>
+                        <div class="icon is-medium circle reviewcircle rating-4 <% if(restaurant.averageRating >= 4) {%> dot-circle <%} if(halfCircleLocation === 4) {%> dot-half-circle <%}%>">
+                        </div>
+                        <div class="icon is-medium circle reviewcircle rating-5 <% if(restaurant.averageRating >= 5) {%> dot-circle <%} if(halfCircleLocation === 5) {%> dot-half-circle <%}%>">
+                        </div>
+                    <% } %>
+                  </div>
+                  <span class="subtitle is-6"><%= restaurant.priceRange %>, <%= restaurant.cuisine %></span>
+
                 </div>
               </div>
             </a>

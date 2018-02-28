@@ -2,7 +2,8 @@
   <div class="columns is-multiline">
     <div class="column is-half">
       <figure class="image">
-        <img src="<%= restaurant.image %>" alt="<%= restaurant.name %>">
+        <div class="imgRestaurantShow" style="background: url(<%=restaurant.image%>)">
+        </div>
       </figure>
       <br>
       <div id="map" class="container">
@@ -11,35 +12,40 @@
     <div class="column is-half">
       <div class="content">
         <h1 class="is-1"><%= restaurant.name %></h1>
-        <p class="subtitle is-6">Location: <%= restaurant.location %></p>
-        <div class="averageRating" data-value="<%= restaurant.averageRating %>">
-          <% if(restaurant.averageRating !== 0) { %>
-            <p>Average rating: <%= restaurant.averageRating %></p>
-            <div class="icon is-medium circle averageRatingcircle rating-1">
-            </div>
-            <div class="icon is-medium circle averageRatingcircle rating-2">
-            </div>
-            <div class="icon is-medium circle averageRatingcircle rating-3">
-            </div>
-            <div class="icon is-medium circle averageRatingcircle rating-4">
-            </div>
-            <div class="icon is-medium circle averageRatingcircle rating-5">
-            </div>
-          <% } else {%>
-            <p>No rating yet</p>
-            <%} %>
-        </div>
-        <div class="content">
-          <p class="subtitle is-6">Price range: <%= restaurant.priceRange %></p>
-          <p class="subtitle is-6">Cuisine: <%= restaurant.cuisine %></p>
-        </div>
+        <p class="subtitle">Location: <%= restaurant.location %></p>
+      </div>
+      <div class="averageRating">
+        <% if(restaurant.averageRating !== 0) { %>
+          <span>
+            <% if(restaurant.averageRating % 1 === 0.5) {%>
+            <%  halfCircleLocation = Math.floor(restaurant.averageRating) + 1} else {halfCircleLocation = 0} %>
+              <div class="icon is-medium circle reviewcircle rating-1 <% if(restaurant.averageRating >= 1) {%> dot-circle <%} if(halfCircleLocation === 1) {%> dot-half-circle <%}%>">
+              </div>
+              <div class="icon is-medium circle reviewcircle rating-2 <% if(restaurant.averageRating >= 2) {%> dot-circle <%} if(halfCircleLocation === 2) {%> dot-half-circle <%}%>">
+              </div>
+              <div class="icon is-medium circle reviewcircle rating-3 <% if(restaurant.averageRating >= 3) {%> dot-circle <%} if(halfCircleLocation === 3) {%> dot-half-circle <%}%>">
+              </div>
+              <div class="icon is-medium circle reviewcircle rating-4 <% if(restaurant.averageRating >= 4) {%> dot-circle <%} if(halfCircleLocation === 4) {%> dot-half-circle <%}%>">
+              </div>
+              <div class="icon is-medium circle reviewcircle rating-5 <% if(restaurant.averageRating >= 5) {%> dot-circle <%} if(halfCircleLocation === 5) {%> dot-half-circle <%}%>">
+              </div>
+          </span>
+          &nbsp<span> <%= restaurant.numberReviews %> reviews</span>
+        <% } else {%>
+          <span>No rating yet</span>
+        <%} %>
+      </div>
+      <br>
+      <div class="content">
+        <p class="subtitle is-6">Price range: <%= restaurant.priceRange %></p>
+        <p class="subtitle is-6">Cuisine: <%= restaurant.cuisine %></p>
         <p class="subtitle is-6"><%= restaurant.description %></p>
         <span class="icon is-small"><i class="fas fa-map-marker"></i></span>
         <span id="restaurantAddress"><%= restaurant.address %>&nbsp</span>
         <span class="icon is-small"><i class="fas fa-phone"></i></span>
-        <span><%= restaurant.phone %>&nbsp</span>
+        <span><%= restaurant.phone %>&nbsp</span><br>
         <span class="icon is-small"><i class="fas fa-desktop"></i></span>
-        <span><%= restaurant.website %></span>
+        <span><a href="<%= restaurant.website %>">&nbsp<%= restaurant.website %></a></span>
       </div>
       <% if (locals.isAuthenticated) { %>
       <div class="container showButtons">
@@ -48,10 +54,10 @@
         <form class="form" action="/restaurants/<%=restaurant._id%>" method="post">
           <button class="button is-danger">Delete</button>
           <input type="hidden" name="_method" value="DELETE">
+        </form>
         <% } %>
       </div>
       <% } %>
-      </form>
     </div>
 
     <%# Review section %>
@@ -137,10 +143,7 @@
               <div class="level-left">
                 <a class="level-item">
                   <span class="icon is-small"><i class="fas fa-reply"></i></span>
-                </a>
-                <a class="level-item">
-                  <span class="icon is-small"><i class="fas fa-retweet"></i></span>
-                </a>
+                 </a>
                 <a class="level-item">
                   <span class="icon is-small"><i class="fas fa-heart"></i></span>
                 </a>

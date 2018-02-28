@@ -77,6 +77,13 @@ schema
     } else return 0;
   });
 
+//add virtual to calculate the number of reviews
+schema
+  .virtual('numberReviews') //Name of the virtual
+  .get(function getNumberReviews() {
+    return this.reviews.length;
+  });
+
 //add virtual to generate distinct locations - did not work as attached to each restaurant and not restaurants so could not show it on the index page.
 // schema
 //   .virtual('distinctLocations') //Name of the virtual

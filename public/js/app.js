@@ -44,25 +44,25 @@ $(() => {
   });
 
   //*************************************************************
-  //display average review value in rating circles
-  const value = $('.averageRating').attr('data-value'); //Returns the average review value for that restaurant
-
-  //loop through all div/circles and keep track of where the last one was
-  let counter = 0;
-  $('.averageRatingcircle').each(function() {
-    if(ratingValue($(this)) <= value){ // each dividend
-      counter++;
-      $(this)
-        .removeClass('circle')
-        .addClass('dot-circle');
-    }
-  });
-  //add a half circle as showing rating by 0.5
-  if (value % 1 === 0.5) {
-    //adds a half circle on the next circle
-    $($('.averageRatingcircle')[counter]).removeClass('circle');
-    $($('.averageRatingcircle')[counter]).addClass('dot-half-circle');
-  }
+  // //display average review value in rating circles
+  // const value = $('.averageRating').attr('data-value'); //Returns the average review value for that restaurant
+  //
+  // //loop through all div/circles and keep track of where the last one was
+  // let counter = 0;
+  // $('.averageRatingcircle').each(function() {
+  //   if(ratingValue($(this)) <= value){ // each dividend
+  //     counter++;
+  //     $(this)
+  //       .removeClass('circle')
+  //       .addClass('dot-circle');
+  //   }
+  // });
+  // //add a half circle as showing rating by 0.5
+  // if (value % 1 === 0.5) {
+  //   //adds a half circle on the next circle
+  //   $($('.averageRatingcircle')[counter]).removeClass('circle');
+  //   $($('.averageRatingcircle')[counter]).addClass('dot-half-circle');
+  // }
 
   //*************************************************************
   //function returns the value of the rating based on which circle is hovered on
@@ -91,7 +91,7 @@ $(() => {
 
     const geocoder = new google.maps.Geocoder();
     const address = $('#restaurantAddress').text();
-
+    // gets the latitute and longitude of the restuarant based in its address
     geocoder.geocode( { 'address': address}, function(results, status) {
       if (status === google.maps.GeocoderStatus.OK) {
         const latitude = results[0].geometry.location.lat(); //number
@@ -111,6 +111,9 @@ $(() => {
   }
 
   if($('#map')[0]) initMap();
+
+  //*************************************************************
+  //GOOGLE AUTOCOMPLETE SETUP for ADDRESSES AND CITIES
 
   function initAutocomplete() {
     let autocomplete;
@@ -133,43 +136,5 @@ $(() => {
   }
 
   if($('#autocomplete')[0]) initAutocomplete();
-
-  // function fillInAddress() {
-  //   // Get the place details from the autocomplete object.
-  //   // let place = autocomplete.getPlace();
-  //   //
-  //   // for (let component in componentForm) {
-  //   //   document.getElementById(component).value = '';
-  //   //   document.getElementById(component).disabled = false;
-  //   // }
-  //   //
-  //   // Get each component of the address from the place details
-  //   // and fill the corresponding field on the form.
-  //   // for (let i = 0; i < place.address_components.length; i++) {
-  //   //   let addressType = place.address_components[i].types[0];
-  //   //   if (componentForm[addressType]) {
-  //   //     let val = place.address_components[i][componentForm[addressType]];
-  //   //     document.getElementById(addressType).value = val;
-  //   //   }
-  //   }
-  // }
-
-  // Bias the autocomplete object to the user's geographical location,
-  // as supplied by the browser's 'navigator.geolocation' object.
-  function geolocate() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function(position) {
-        let geolocation = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
-        };
-        let circle = new google.maps.Circle({
-          center: geolocation,
-          radius: position.coords.accuracy
-        });
-        autocomplete.setBounds(circle.getBounds());
-      });
-    }
-  }
 
 });

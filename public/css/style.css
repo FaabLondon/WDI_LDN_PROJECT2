@@ -1,9 +1,25 @@
+.navbar {
+  margin-bottom: 50px;
+  background-color: #f90386; }
+  .navbar div a {
+    color: #555555;
+    font-weight: 600; }
+
+.imgRestaurantShow {
+  height: 300px;
+  background: transparent no-repeat center;
+  background-size: cover; }
+
+.averageRating {
+  display: flex;
+  flex-direction: row;
+  align-items: center; }
+
 .showButtons {
   display: flex;
   flex-direction: row; }
-
-.showButtons button {
-  margin-left: 10px; }
+  .showButtons button {
+    margin-left: 10px; }
 
 /* review circle settings in show page*/
 .circle {
@@ -28,7 +44,7 @@
   background-size: cover; }
 
 .restaurantCard {
-  height: 500px; }
+  height: 400px; }
 
 /* Carrousel settings */
 .carrousel .imgCarrousel {

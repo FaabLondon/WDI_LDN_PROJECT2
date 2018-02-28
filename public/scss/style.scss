@@ -1,9 +1,38 @@
+body{
+  // font-family: 'Chicle', cursive;
+}
+
+.navbar{
+  margin-bottom: 50px;
+  background-color: #f90386;
+  div{
+      a{
+        color: #555555;
+        font-weight: 600;
+      }
+  }
+}
+
+// SHOW page
+
+.imgRestaurantShow{
+  height: 300px;
+  background: transparent no-repeat center;
+  background-size: cover;
+}
+.averageRating{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
 .showButtons {
   display: flex;
-  flex-direction: row; }
-  .showButtons button {
-    margin-left: 10px; }
-
+  flex-direction: row;
+  button {
+    margin-left: 10px;
+  }
+}
 /* review circle settings in show page*/
 .circle {
   background-image: url(https://i.imgur.com/DVEpwbs.png);
@@ -28,7 +57,7 @@
 }
 
 .restaurantCard{
-  height: 500px;
+  height: 400px;
 }
 
 /* Carrousel settings */
