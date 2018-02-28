@@ -71,7 +71,7 @@ $(() => {
 
   //*************************************************************
 
-  //to activate burger menu on mobile
+  //to activate burger menu on mobile in BULMA
   // Add a click event on each burger menu
   $('.navbar-burger').on('click', function () {
     // Get the target from the "data-target" attribute
