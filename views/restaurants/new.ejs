@@ -1,5 +1,6 @@
 <div class="container">
-  <div class="title is-4">Add a new restaurant</div>
+  <span class="title is-4">Add a new restaurant</span><span class="has-text-grey"> - All fields are required <span/>
+  <br><br>
   <form method="POST" action="/restaurants">
     <div class="field">
       <label class="label">Name</label>
@@ -8,9 +9,9 @@
       </div>
     </div>
     <div class="field">
-      <label class="label">Location</label>
+      <label class="label">Location (City)</label>
       <div class="control has-icons-left">
-        <input id="city" name="location" class="input" type="text" placeholder="City" required>
+        <input id="autocompleteCity" name="location" class="input" type="text" placeholder="City" required>
         <span class="icon is-small"><i class="fas fa-map-marker"></i></span>
       </div>
     </div>
@@ -41,13 +42,14 @@
     <div class="field">
       <label class="label">Image</label>
       <div class="control">
-        <input name="image" class="input" type="url" placeholder="link to image" required >
+        <div id="dropzone" style="width:500px;height:100px;"></div>
+        <input class="InputImage" name="image" class="input" type="hidden" value ="" required>
       </div>
     </div>
     <div class="field">
       <label class="label">Address</label>
       <div class="control has-icons-left">
-        <input id="autocomplete" name="address" class="input" type="text" placeholder="Address" required>
+        <input id="autocompleteAddress" name="address" class="input" type="text" placeholder="Address" required>
         <span class="icon is-small"><i class="fas fa-home"></i></span>
       </div>
     </div>

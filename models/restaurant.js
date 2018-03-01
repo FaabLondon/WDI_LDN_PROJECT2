@@ -35,8 +35,7 @@ const schema = new mongoose.Schema({
   description: {type: String, required: true, maxlength: 380},
   image: {
     type: String,
-    required: true,
-    validate: image => /https?:\/\/.+/.test(image)
+    required: true
   },
   address: {type: String,required: true},
   phone: {
@@ -47,7 +46,7 @@ const schema = new mongoose.Schema({
   website: {
     type: String,
     required: true,
-    validate: image => /https?:\/\/.+/.test(image)
+    validate: website => /https?:\/\/.+/.test(website)
   },
   reviews: [reviewSchema],
   user: { type: mongoose.Schema.ObjectId, ref: 'User'}

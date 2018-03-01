@@ -1,63 +1,68 @@
 <main class="container">
-  <div class="content">
-    <h1 class="is-1">Please validate or delete users commments</h1>
-  </div>
+    <h1 class="is-size-1-desktop is-size-3-touch">Reviews moderation</h1>
   <div class="columns is-multiline">
     <div class="column">
+      <p class="is-size-4-desktop is-size-5-touch">You can validate or delete users</p>
+      <% Totalreviews = 0 %>
       <% restaurants.forEach(restaurant => { %>
-      <div class="content">
-        <h2 class="is-2"><%= restaurant.name %></h2>
-        <p class="subtitle is-6"><%= restaurant.location %></p>
-        <p><% if (restaurant.reviews.every(elt => elt.moderate === true)) { %> No reviews to moderate <% } %>
-      </div>
-      <br>
-        <% restaurant.reviews.forEach(review => { %>
-          <% if (!review.moderated) { %>
-            <article class="media">
-              <figure class="media-left">
-                <p class="image is-64x64">
-                  <img src="https://www.fillmurray.com/140/100">
-                </p>
-              </figure>
-              <div class="media-content">
-                <div class="content">
-                  <p>
-                    <% if(review.user) { %>
-                      <strong><%= review.user.username %></strong>
-                      <small><%= review.user.email %></small>
-                      <small><%= review.formattedDate %></small>
-                    <% } %>
-                    <br>
-                    <strong>Rating : <%= review.rating %></strong>
-                    <br>
-                    <strong>Title: <%= review.maintitle %></strong>
-                    <br>
-                    Content: <%= review.content %>
+        <% if (restaurant.reviews.some(elt => !elt.moderated)) {%>
+          <br>
+          <div class="content">
+            <h2 class="is-2"><%= restaurant.name %></h2>
+            <p class="subtitle is-6"><%= restaurant.location %></p>
+          </div>
+          <br>
+          <% restaurant.reviews.forEach(review => { %>
+            <% if (!review.moderated) { Totalreviews++ %>
+              <article class="media">
+                <figure class="media-left">
+                  <p class="image is-64x64">
+                    <img src="https://www.fillmurray.com/140/100">
                   </p>
-                    <strong class="has-text-danger">AWAITING MODERATION</strong>
+                </figure>
+                <div class="media-content">
+                  <div class="content">
+                    <p>
+                      <% if(review.user) { %>
+                        <strong><%= review.user.username %></strong>
+                        <small><%= review.user.email %></small>
+                        <small><%= review.formattedDate %></small>
+                      <% } %>
+                      <br>
+                      <strong>Rating : <%= review.rating %></strong>
+                      <br>
+                      <strong>Title: <%= review.maintitle %></strong>
+                      <br>
+                      Content: <%= review.content %>
+                    </p>
+                      <strong class="has-text-danger">AWAITING MODERATION</strong>
+                  </div>
                 </div>
-              </div>
-              <div class="media-right moderationButtons">
-                  <form action="/moderate/<%=restaurant._id%>/reviews/<%=review._id%>" method="POST">
-                    <p>Delete</p>
-                    <button class="delete"></button>
-                    <input type="hidden" name="_method" value="DELETE">
-                  </form>
-                  <br>
-                    <p>Validate</p>
-                  <a href="/moderate/<%=restaurant._id%>/reviews/<%=review._id%>" class="button is-small">
-                    <div class="icon is-small">
-                      <i class="fas fa-check"></i>
-                    </div>
-                  </a>
-              </div>
-            </article>
-          <% } %>
-        <% }) %>
-        <br>
-        <div class="is-divider" data-content="NEXT RECORD"></div>
-        <br>
+                <div class="media-right moderationButtons">
+                    <form action="/moderate/<%=restaurant._id%>/reviews/<%=review._id%>" method="POST">
+                      <p>Delete</p>
+                      <button class="delete"></button>
+                      <input type="hidden" name="_method" value="DELETE">
+                    </form>
+                    <br>
+                      <p>Validate</p>
+                    <a href="/moderate/<%=restaurant._id%>/reviews/<%=review._id%>" class="button is-small">
+                      <div class="icon is-small">
+                        <i class="fas fa-check"></i>
+                      </div>
+                    </a>
+                </div>
+              </article>
+            <% } %>
+          <% }) %>
+          <br>
+          <div class="is-divider" data-content="NEXT RECORD"></div>
+          <br>
+        <% } %>
       <% }) %>
+      <% if (Totalreviews !== 0) {%>
+        <p class="is-size-4-desktop is-size-5-touch">No reviews to moderate</p>
+      <% } %>
     </div>
   </div>
 </main>

@@ -1,5 +1,7 @@
 <div class="container">
-  <div class="title is-4">Edit restaurant: <%= restaurant.name %></div>
+
+  <span class="title is-4">Edit restaurant: <%= restaurant.name %></span><span class="has-text-grey"> - All fields are required <span/>
+    <br><br>
 
   <form method="POST" action="/restaurants/<%= restaurant._id %>">
     <input type="hidden" name="_method" value="PUT">
@@ -45,7 +47,8 @@
     <div class="field">
       <label class="label">Image</label>
       <div class="control">
-        <input name="image" class="input" type="text" placeholder="link to image" value="<%= restaurant.image %>" required pattern="/^https?:\/\/.+/">
+        <div id="dropzone" style="width:500px;height:100px;"></div>
+        <input class="InputImage" name="image" class="input" type="hidden" value ="<%= restaurant.image %>" required>
       </div>
     </div>
     <div class="field">

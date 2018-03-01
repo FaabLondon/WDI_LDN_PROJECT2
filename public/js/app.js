@@ -18,8 +18,27 @@ $(() => {
     //variableWidth: true
   });
 
-  // $('.homepageTitle').slick();
+  //**************************************************************
+  //filestack
+  if($('#dropzone')[0]) {
+    const client = filestack.init('AFOYrjEmESlCGqN9sQtLOz');
 
+    const pickOptions = {
+      accept: 'image/*',
+      maxFiles: 1,
+      minFiles: 1,
+      maxSize: 1024*1024,
+      imageDim: [500, 300],
+      transformations: { crop: true }
+    };
+
+    client.makeDropPane({
+      id: 'dropzone',
+      customText: 'Drag and Drop, copy and paste image or the URL of your image ',
+      onSuccess: result => $('.InputImage').attr('value', result[0].url)
+      // onError: () => alert('Oups, there was a problem with the file upload')
+    }, pickOptions);
+  }
   //*************************************************************
   //on mouseover on rating circles
   $('.ratingcircle').on('mouseover', function () {
@@ -42,27 +61,6 @@ $(() => {
       }
     });
   });
-
-  //*************************************************************
-  // //display average review value in rating circles
-  // const value = $('.averageRating').attr('data-value'); //Returns the average review value for that restaurant
-  //
-  // //loop through all div/circles and keep track of where the last one was
-  // let counter = 0;
-  // $('.averageRatingcircle').each(function() {
-  //   if(ratingValue($(this)) <= value){ // each dividend
-  //     counter++;
-  //     $(this)
-  //       .removeClass('circle')
-  //       .addClass('dot-circle');
-  //   }
-  // });
-  // //add a half circle as showing rating by 0.5
-  // if (value % 1 === 0.5) {
-  //   //adds a half circle on the next circle
-  //   $($('.averageRatingcircle')[counter]).removeClass('circle');
-  //   $($('.averageRatingcircle')[counter]).addClass('dot-half-circle');
-  // }
 
   //*************************************************************
   //function returns the value of the rating based on which circle is hovered on
@@ -115,26 +113,23 @@ $(() => {
   //*************************************************************
   //GOOGLE AUTOCOMPLETE SETUP for ADDRESSES AND CITIES
 
-  function initAutocomplete() {
-    let autocomplete;
-    // Create the autocomplete object, restricting the search to geographical
-    // location types.
-    autocomplete = new google.maps.places.Autocomplete(
+  function initAutocompleteAddress() {
+    //google maps autocomplete with addresses
+    new google.maps.places.Autocomplete(
     /** @type {!HTMLInputElement}*/
-      ($('#autocomplete')[0]),
+      ($('#autocompleteAddress')[0]),
       {types: ['geocode']});
+  }
 
-    const place = autocomplete.getPlace();
-    console.log(place);
-
-    // Create the autocomplete object, restricting the search to geographical
-    // cities
-    autocomplete = new google.maps.places.Autocomplete(
+function initAutocompleteCity() {
+    //google maps autocomplete with cities
+    new google.maps.places.Autocomplete(
     /** @type {!HTMLInputElement}*/
-      ($('#city')[0]),
+      ($('#autocompleteCity')[0]),
       {types: ['(cities)']});
   }
 
-  if($('#autocomplete')[0]) initAutocomplete();
+  if($('#autocompleteAddress')[0]) initAutocompleteAddress();
+  if($('#autocompleteCity')[0]) initAutocompleteCity();
 
 });
