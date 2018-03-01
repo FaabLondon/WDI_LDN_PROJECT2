@@ -21,7 +21,7 @@ const app = express();
 const PORT = process.env.PORT || 8000;
 
 //Connect to our database
-mongoose.connect('mongodb://localhost/main-database');
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/main-database');
 
 //configure Express to use ejs
 app.set('view engine', 'ejs');
