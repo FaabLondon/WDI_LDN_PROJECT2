@@ -9,9 +9,8 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/main-database',
   //db.dropDatabase();
   db.dropCollection('restaurants');
 
-  User.findOne({ email: 'faabke@gmail.com' }) //all the seed restaurant will be created by admin
+  User.findOne({ admin: true }) //all the seed restaurant will be created by admin
     .then(user => {
-      user['admin'] = true;
       restaurantData = restaurantData.map(restaurant => {
         restaurant.user = user;
         return restaurant;
