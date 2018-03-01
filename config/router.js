@@ -9,6 +9,8 @@ const secureRoute = require('../lib/secureRoute');
 router.route('/')
   .get(restaurants.homepage);
 
+//*************** RESTAURANTS ROUTES*****************************
+
 //INDEX and CREATE route
 router.route('/restaurants')
   .get(restaurants.index)
@@ -23,6 +25,12 @@ router.route('/restaurants/:id')
   .get(restaurants.show)
   .put(secureRoute, restaurants.update)
   .delete(secureRoute, restaurants.delete);
+
+//EDIT Route
+router.route('/restaurants/:id/edit')
+  .get(secureRoute, restaurants.edit);
+
+//**************** REVIEW ROUTES*****************************
 
 //NEW review
 router.route('/restaurants/:id/reviews')
@@ -41,15 +49,22 @@ router.route('/moderate/:id/reviews/:reviewId')
   .delete(secureRoute, restaurants.moderateDelete)
   .get(secureRoute, restaurants.moderateUpdate);
 
+//*************** USER /REGISTRATION ROUTES*****************************
 
-//EDIT Route
-router.route('/restaurants/:id/edit')
-  .get(secureRoute, restaurants.edit);
-
-//NEW User registration route
+//NEW and CREATE User route
 router.route('/register')
   .get(registration.new)
   .post(registration.create);
+
+//EDIT User route
+router.route('/register/:userid/edit')
+  .get(secureRoute, registration.edit);
+
+//UPDATE User route
+router.route('/register/:userid')
+  .put(secureRoute, registration.update);
+
+//*************** SESSION ROUTES*****************************
 
 //NEW, CREATE routes for session - login
 router.route('/login')

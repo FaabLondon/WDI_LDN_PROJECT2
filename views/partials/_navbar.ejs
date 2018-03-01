@@ -32,6 +32,8 @@
           <a class="navbar-link" href=""> <span class="icon is-small"><i class="fas fa-user"></i></span>&nbsp <%= locals.currentUser.username %></a>
           <div class="navbar-dropdown is-boxed is-right">
             <a class="navbar-item" href="/logout">Logout</a>
+            <a class="navbar-item" href="/register/<%= locals.currentUser._id%>/edit">Edit profile</a>
+
             <%if(locals.currentUser.admin === true) {%>
             <hr class="navbar-divider">
             <a class="navbar-item" href="/moderate">Moderate reviews</a>

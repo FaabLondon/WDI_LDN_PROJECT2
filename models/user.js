@@ -7,6 +7,7 @@ const schema = new mongoose.Schema({
   username: {type: String, required: true},
   email: {type: String, required: true, unique: true},
   password: {type: String, required: true},
+  image: {type: String, default: 'https://images.cdn.stuff.tv/sites/stuff.tv/files/avatar.png' },
   admin: {type: Boolean, default: false}
 });
 
@@ -15,12 +16,20 @@ const schema = new mongoose.Schema({
 // `this` refers to the user object. It contains data object from user.create(req.body) //The '_' means it is temporary
 schema
   .virtual('passwordConfirmation')
-  .set(function setPasswordConfirmation(passwordConfirmation) {
+  .set(function setPasswordConfirmation(passwordConfirmation) { //field taken from the form subitted
     this._passwordConfirmation = passwordConfirmation;
   });
 
 //pre-validate hook to check that password and password confirmation match
 schema.pre('validate', function checkPassword(next){
+  if(this.isModified('password') && this._passwordConfirmation !== this.password) this.invalidate('passwordConfirmation', 'does not match');
+
+  // otherwise continue to the next step (validation)
+  next();
+});
+
+//pre-validate hook to check that password and password confirmation match
+schema.pre('update', function checkPassword(next){
   if(this.isModified('password') && this._passwordConfirmation !== this.password) this.invalidate('passwordConfirmation', 'does not match');
 
   // otherwise continue to the next step (validation)

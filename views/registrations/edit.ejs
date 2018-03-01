@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="title is-4">Profile update</div>
+  <form method="POST" action="/register/<%=user._id%>">
+    <input type="hidden" name="_method" value="PUT">
+    <div class="field">
+      <label class="label">Username</label>
+      <div class="control has-icons-left">
+        <input name="username" class="input" type="text" placeholder="Your username" value="<%=user.username%>" required>
+        <span class="icon is-small"><i class="far fa-user"></i></span>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Email</label>
+      <div class="control has-icons-left">
+        <input name="email" class="input" type="text" placeholder="Your email" value="<%=user.email%>" required>
+        <span class="icon is-small"><i class="far fa-envelope"></i></span>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">In order to update your profile, please enter your password</label>
+      <div class="control">
+        <input name="password" class="input" type="password" placeholder="Password" required>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Please re-enter your password to confirm changes</label>
+      <div class="control">
+        <input name="passwordConfirmation" class="input" type="password" placeholder="Password Confirmation" required>
+      </div>
+    </div>
+    <button class="button">Update</button>
+  </form>
+</div>

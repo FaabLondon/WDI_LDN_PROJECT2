@@ -13,7 +13,31 @@ function createRoute(req, res, next){
     .catch(next);
 }
 
+//show edit profile for user
+function editRoute(req, res, next){
+  User.findById(req.params.userid)
+    .then(user => res.render('registrations/edit', {user}))
+    .catch(next);
+}
+
+function updateRoute(req, res, next){
+  User.findById(req.params.userid)
+    .then(user => {
+      console.log(req.body.password);
+      if(!user.validatePassword(req.body.password) || !user.validatePassword(req.body.passwordConfirmation)){
+        res.redirect(`/register/${req.params.userid}/edit`);
+      } else {
+        Object.assign(user, req.body);
+        user.save();
+        res.redirect('/');
+      }
+    })
+    .catch(next);
+}
+
 module.exports = {
   new: newRoute,
-  create: createRoute
+  create: createRoute,
+  edit: editRoute,
+  update: updateRoute
 };
