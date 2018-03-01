@@ -5,7 +5,7 @@ mongoose.Promise = require('bluebird');
 let restaurantData = require('./data/restaurants');
 const User = require('../models/user');
 
-mongoose.connect('mongodb://localhost/main-database', (err, db) =>{
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/main-database', (err, db) =>{
   //db.dropDatabase();
   db.dropCollection('restaurants');
 
