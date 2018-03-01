@@ -2,7 +2,7 @@
     <h1 class="is-size-1-desktop is-size-3-touch">Reviews moderation</h1>
   <div class="columns is-multiline">
     <div class="column">
-      <p class="is-size-4-desktop is-size-5-touch">You can validate or delete users</p>
+      <p class="is-size-4-desktop is-size-5-touch">You can validate or delete reviews</p>
       <% Totalreviews = 0 %>
       <% restaurants.forEach(restaurant => { %>
         <% if (restaurant.reviews.some(elt => !elt.moderated)) {%>

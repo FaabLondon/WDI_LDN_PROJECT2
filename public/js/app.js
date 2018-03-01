@@ -20,6 +20,9 @@ $(() => {
 
   //**************************************************************
   //filestack
+
+
+
   if($('#dropzone')[0]) {
     const client = filestack.init('AFOYrjEmESlCGqN9sQtLOz');
 
@@ -39,6 +42,27 @@ $(() => {
       // onError: () => alert('Oups, there was a problem with the file upload')
     }, pickOptions);
   }
+
+
+  if($('#dropzoneProfilepic')[0]) {
+    const client = filestack.init('AFOYrjEmESlCGqN9sQtLOz');
+    const pickOptions = {
+      accept: 'image/*',
+      maxFiles: 1,
+      minFiles: 1,
+      maxSize: 1024*1024,
+      imageDim: [200, 300],
+      transformations: { crop: true }
+    };
+
+    client.makeDropPane({
+      id: 'dropzoneProfilepic',
+      customText: 'Drag and Drop, copy and paste image or the URL of your image ',
+      onSuccess: result => $('.ProfilePic').attr('value', result[0].url)
+      // onError: () => alert('Oups, there was a problem with the file upload')
+    }, pickOptions);
+  }
+
   //*************************************************************
   //on mouseover on rating circles
   $('.ratingcircle').on('mouseover', function () {

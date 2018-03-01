@@ -13,10 +13,17 @@
     <div class="field">
       <label class="label">Email</label>
       <div class="control has-icons-left">
-        <input name="email" class="input" type="text" placeholder="Your email" value="<%=user.email%>" required>
+        <input name="image" class="input" type="text" placeholder="Your email" value="<%=user.email%>" required>
         <span class="icon is-small"><i class="far fa-envelope"></i></span>
       </div>
     </div>
+
+    <div class="field">
+      <label class="label">Profile picture</label>
+      <div class="control">
+        <div id="dropzoneProfilepic" style="width:500px;height:100px;"></div>
+        <input class="ProfilePic" name="image" class="input" type="hidden" value ="" required>
+      </div>
 
     <div class="field">
       <label class="label">In order to update your profile, please enter your password</label>
