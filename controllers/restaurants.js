@@ -11,7 +11,7 @@ function homepageRoute(req, res, next) {
 
 //INDEX route for restaurants
 function indexRoute(req, res, next){
-  console.log(req.query);
+  // console.log(req.query);
   Promise.props({
     allRestaurants: Restaurant.find(),
     restaurants: Restaurant.find(req.query)

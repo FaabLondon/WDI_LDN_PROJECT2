@@ -75,4 +75,8 @@ router.route('/login')
 router.route('/logout')
   .get(session.delete);
 
+//******************* ERROR MANAGEMENT *****************
+
+router.all('/*', (req, res) => res.render('pages/404'));
+
 module.exports = router;
