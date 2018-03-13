@@ -20,9 +20,7 @@ $(() => {
 
   //**************************************************************
   //filestack
-
-
-
+  
   if($('#dropzone')[0]) {
     const client = filestack.init('AFOYrjEmESlCGqN9sQtLOz');
 

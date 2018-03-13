@@ -18,8 +18,9 @@ function indexRoute(req, res, next){
   })
     .then(data => {
       ['location', 'cuisine', 'priceRange'].forEach(key => {
-        data[`${key}s`] = Array.from(new Set(data.allRestaurants.map(restaurant => restaurant[key])));
-        data[`selected${key}`] = typeof req.query[key] === 'string' ? req.query[key].split(): req.query[key] ; //store the selected data
+        data[`${key}s`] = Array.from(new Set(data.allRestaurants.map(restaurant => restaurant[key]))).sort();
+        data[`selected${key}`] = typeof req.query[key] === 'string' ? req.query[key].split(): req.query[key] ;
+        //store the selected data that can look like {cuisine: ['world food', 'italian']} or {cuisine: 'italian'}
       });
       res.render('restaurants/index', data); //Object of variable I want to pass in render
     })
