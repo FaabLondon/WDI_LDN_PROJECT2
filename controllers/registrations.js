@@ -20,6 +20,7 @@ function editRoute(req, res, next){
     .catch(next);
 }
 
+//enables to update the user profile
 function updateRoute(req, res, next){
   User.findById(req.params.userid)
     .then(user => {

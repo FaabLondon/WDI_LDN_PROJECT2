@@ -7,6 +7,7 @@ $(() => {
 
   //***************** SLICK CARROUSEL ******************************
 
+/* setup the slick carrousel on homepage */
   $('.carrousel').slick({
     dots: true,
     infinite: true,
@@ -20,7 +21,8 @@ $(() => {
 
   //**************************************************************
   //filestack
-  
+
+  /* filestack to upload an image for a restaurant */
   if($('#dropzone')[0]) {
     const client = filestack.init('AFOYrjEmESlCGqN9sQtLOz');
 
@@ -41,7 +43,7 @@ $(() => {
     }, pickOptions);
   }
 
-
+  /* filestack to upload an image for a user - this is not working as it appends the user email to the file name for some reason - need to look into it */
   if($('#dropzoneProfilepic')[0]) {
     const client = filestack.init('AFOYrjEmESlCGqN9sQtLOz');
     const pickOptions = {
@@ -62,6 +64,8 @@ $(() => {
   }
 
   //*************************************************************
+  //Code to allow user to enter a review by clicking on circles.
+
   //on mouseover on rating circles
   $('.ratingcircle').on('mouseover', function () {
     const value = ratingValue($(this)); //this is div hovered on, function returns value of rating
@@ -93,7 +97,7 @@ $(() => {
 
   //*************************************************************
 
-  //to activate burger menu on mobile in BULMA
+  //Code to activate burger menu on mobile in BULMA
   // Add a click event on each burger menu
   $('.navbar-burger').on('click', function () {
     // Get the target from the "data-target" attribute
@@ -143,7 +147,7 @@ $(() => {
       {types: ['geocode']});
   }
 
-function initAutocompleteCity() {
+  function initAutocompleteCity() {
     //google maps autocomplete with cities
     new google.maps.places.Autocomplete(
     /** @type {!HTMLInputElement}*/
