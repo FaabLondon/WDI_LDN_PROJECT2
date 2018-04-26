@@ -86,6 +86,6 @@ This will all be corrected in due time.
 ## Setup instructions
 
 - Clone or download the repo
-- Install dependencies with `yarn install`
+- Install dependencies with `yarn install` or `npm install`
 - Start the local MongoDB server in Node.js with `mongod`
 - Launch the app with `node index`
