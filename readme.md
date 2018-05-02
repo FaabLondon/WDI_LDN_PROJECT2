@@ -27,7 +27,7 @@ I decided to add the following features:
 * My app includes authentication with encrypted passwords (bcrypt) & an authorization flow with secure routes to perform create, delete and edit restaurant.
 * The app is deployed on heroku and accessible to the public.
 
-##### [Please visit website](https://express-app-restreviews.herokuapp.com/)
+##### [Please visit the website](https://kids-and-cie.herokuapp.com/)
 
 ###### Homepage
 * The homepage allows the user to go to the restaurant menu to see all resturants or to Register (Join) or login
