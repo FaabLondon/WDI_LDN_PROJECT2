@@ -51,7 +51,7 @@ The user can also edit and delete the restaurant (if he/she was the creator of i
 
 
 ###### Create restaurant
-* On this page, users can create their own restaurant and can use filestack to upload a restaurant picture. On form submission flags any missing field or incorrectly entered field is flagged.
+* On this page, users can create their own restaurant and can use filestack to upload a restaurant picture. On form submission, any missing field or incorrectly entered field is flagged.
 
 <p align="center"><img src="https://i.imgur.com/PoVN1Z2.png" width="700"></p>
 
@@ -61,7 +61,7 @@ The user can also edit and delete the restaurant (if he/she was the creator of i
 <p align="center"><img src="https://i.imgur.com/WbuUx5s.png" width="700"></p>
 
 ###### Moderate reviews (Admin only)
-* This page is only accessible by the admin user and enables him/her to review all newly added comments and validate them or reject them. Once validated, the comment is displayed on the restaurant's page.
+* This page is only accessible to the admin user and enables him/her to review all newly added comments and validate them or reject them. Once validated, the comment is displayed on the restaurant's page.
 
 <p align="center"><img src="https://i.imgur.com/mFqQKH2.png" width="700"></p>
 
