@@ -24,13 +24,13 @@ I decided to add the following features:
 ### Technical features
 * The app is using the MVC paradigm with 2 models, one for restaurants, the main ressource for my app and one for users. A review model is also embedded in the restaurant model in order for users to leave reviews. The user model is referenced in both the restaurant and review models to keep track of the creator of a restaurant and the author of a review.
 * The app has complete RESTful routes for restaurants with all CRUD actions. It also allows to create and delete reviews (delete is for admin only) and finally, it allows users to register and update their profile.
-* My app includes authentication with encrypted passwords (bcrypt) & an authorization flow with secure routes to perform create, delete and edit restaurant.
-* The app is deployed on heroku and accessible to the public.
+* My app includes authentication with encrypted passwords (bcrypt) & an authorisation flow with secure routes to perform create, delete and edit restaurant.
+* The app is deployed on Heroku and accessible to the public.
 
 ##### [Please visit the website](https://kids-and-cie.herokuapp.com/)
 
 ###### Homepage
-* The homepage allows the user to go to the restaurant menu to see all resturants or to Register (Join) or login
+* The homepage allows the user to go to the restaurant menu to see all restaurants or to Register (Join) or login
 
 <p align="center"><img src="https://i.imgur.com/GwiDK3w.png" width="700"></p>
 
@@ -72,14 +72,17 @@ The user can also edit and delete the restaurant (if he/she was the creator of i
 
 
 ---
-I was pleased with the final product, which I feel looks good and is user friendly.
-I would have liked to add additional features such as favourites on the user profile, or the possibility for user's to reply to comments left by other users. This will be added in the future.
 
+## Wins
+I was pleased with the final product, which I feel looks good and is user friendly. I managed to implement all the extra features (google APIs, review moderation, filestack, slick carrousel, etc...) within the timeframe and with no assistance from the instructor which is great. It is all about reading the docs!
+
+## Challenges
 The main challenge was get acquainted with some public APIs like google maps, autocomplete or Filestack for example.
 There is still a bug on the user profile when uploading a profile picture and when submitting the user profile. If the user enters a password different from the one stored in the DB, that password will be changed.
-Also the admin user should be able to edit and delete any restaurant, not just the one he/she created.
+Also the admin user should be able to edit and delete any restaurant, not just the one he/she created. This will all be corrected in due time.
 
-This will all be corrected in due time.
+## Future features
+I would like to add additional features such as favourites on the user profile, or the possibility for user's to reply to comments left by other users. This will be added in the future.
 
 ---
 
